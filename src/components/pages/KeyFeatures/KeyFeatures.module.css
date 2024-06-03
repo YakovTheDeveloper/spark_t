@@ -1,0 +1,35 @@
+.container {
+    margin: 0 auto;
+    padding-top: 6%;
+    width: 90%;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.features {
+    display: flex;
+    gap: 12px;
+}
+
+.box {
+    background-color: rgba(255, 255, 255, 0.12);
+    padding: 24px 24px 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.box h2 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+.box p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+}
