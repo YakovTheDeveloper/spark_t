@@ -1,17 +1,23 @@
 .container {
     display: flex;
-    padding-top: 15%;
+    padding-top: 20%;
     justify-content: space-between;
+    padding-left: var(--padding-desktop-container-horizontal);
+    padding-right: var(--padding-desktop-container-horizontal);
 }
 
 .choose {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex-grow: 1;
+    max-width: 506px;
 }
 
 .formContainer {
     display: none;
+    flex-direction: column;
+    gap: 32px;
 }
 
 .choice {
@@ -45,10 +51,19 @@
     height: 0;
 }
 
-.container:has(input[id='Validator']:checked) .validatorForm {
+.text {
+    display: none;
+}
+
+.container:has(input[id='Validator']:checked) .validatorForm, .container:has(input[id='Validator']:checked) .textValidator {
     display: flex;
 }
 
-.container:has(input[id='Searcher']:checked) .searcherForm {
+.container:has(input[id='Searcher']:checked) .searcherForm, .container:has(input[id='Searcher']:checked) .textSearcher {
     display: flex;
+}
+
+.forms {
+    max-width: 506px;
+    flex-grow: 1;
 }

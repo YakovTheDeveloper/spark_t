@@ -1,7 +1,29 @@
 import React from 'react';
 import styles from './Registration.module.css';
-import Lines from '../../../assets/blur/radial_lines.png';
 import classNames from 'classnames';
+import Input from '../../ui/Input/Input';
+import Button from '../../ui/Button/Button';
+
+const ValidatorForm = () => {
+	return (
+		<form action='POST' className={classNames(styles.formContainer, styles.validatorForm)}>
+			<Input label={'Specify the Identity of your validator(s)'} />
+			<Input label={'Provide the desired address for payouts'} />
+			<Input label={'Your Telegram '} />
+			<Button>Submit</Button>
+		</form>
+	);
+};
+
+const SearcherForm = () => {
+	return (
+		<form action='POST' className={classNames(styles.formContainer, styles.searcherForm)}>
+			<Input label={'Describe your experience and the strategies you would like to implement using our mempool'} />
+			<Input label={'Your Telegram '} />
+			<Button>Submit</Button>
+		</form>
+	);
+};
 
 const Registration = () => {
 	return (
@@ -20,17 +42,16 @@ const Registration = () => {
 					{/* <button className={styles.choiceItem}>Validator</button> */}
 					{/* <button className={styles.choiceItem}>Searcher</button> */}
 				</div>
-				<p className={styles.text}>
+				<p className={classNames(styles.text, styles.textValidator)}>
 					Join our network by registering as a validator and submitting your server location.
 				</p>
+				<p className={classNames(styles.text, styles.textSearcher)}>
+					Sign up as a searcher to access our open mempool and contribute to the MEV ecosystem.
+				</p>
 			</div>
-			<div>
-				<form action='POST' className={classNames(styles.formContainer, styles.validatorForm)}>
-					val
-				</form>
-				<form action='POST' className={classNames(styles.formContainer, styles.searcherForm)}>
-					ser
-				</form>
+			<div className={styles.forms}>
+				<ValidatorForm />
+				<SearcherForm />
 			</div>
 		</div>
 	);

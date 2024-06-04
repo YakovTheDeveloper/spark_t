@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-grow: 1;
+    user-select: none;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 26px 90px;
+    border-radius: 7px;
+    color: black;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 1);
+    align-items: center;
+    justify-content: center;
+}

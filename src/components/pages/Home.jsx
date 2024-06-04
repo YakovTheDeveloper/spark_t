@@ -10,61 +10,90 @@ import AboutUs from './AboutUs/AboutUs';
 import Documentation from './Documentation/Documentation';
 import Registration from './Registration/Registration';
 import Achievements from './Achievements/Achievements';
+import useOnScreen from '../../hooks/useOnScreen';
 
 const slides = [
 	{
 		Component: Welcome,
-		props: {},
+		slideProps: {},
+		componentProps: {},
 	},
+	// {
+	// 	Component: OurVision,
+	// 	slideProps: {},
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: KeyFeatures,
+	// 	slideProps: {},
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: AboutUs,
+	// 	slideProps: {},
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: { selectedLink: 1 },
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: { selectedLink: 2 },
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: { selectedLink: 3 },
+	// },
+	// {
+	// 	Component: AdminPanel,
+	// 	slideProps: { className: styles.adminPanel },
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: Documentation,
+	// 	slideProps: { className: styles.docs },
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: Registration,
+	// 	slideProps: { className: styles.reg },
+	// 	componentProps: {},
+	// },
 	{
-		Component: OurVision,
-		props: {},
-	},
-	{
-		Component: KeyFeatures,
-		props: {},
-	},
-	{
-		Component: AboutUs,
-		props: {},
-	},
-	{
-		Component: AboutUsMore,
-		props: {},
-	},
-	{
-		Component: AboutUsMore,
-		props: { selectedLink: 1 },
-	},
-	{
-		Component: AboutUsMore,
-		props: { selectedLink: 2 },
-	},
-	{
-		Component: AboutUsMore,
-		props: { selectedLink: 3 },
-	},
-	{
-		Component: AdminPanel,
-		props: { className: styles.adminPanel },
-	},
-	{
-		Component: Documentation,
-		props: { className: styles.docs },
+		Component: Achievements,
+		slideProps: {},
+		componentProps: {},
 	},
 	{
 		Component: Registration,
-		props: { className: styles.reg },
-	},
-	{
-		Component: Achievements,
-		props: {},
+		slideProps: { className: styles.reg },
+		componentProps: {},
 	},
 ];
+
+function isInViewport(yourElement, offset = 0) {
+	if (!yourElement) return false;
+	const top = yourElement.getBoundingClientRect().top;
+	const result = top + offset >= 0 && top - offset <= window.innerHeight;
+	console.log('result', result);
+	return top + offset >= 0 && top - offset <= window.innerHeight;
+}
 
 const Home = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const itemsRef = useRef([]);
+	const [scrollable, setScrollable] = useState(true);
+
+	const [eventScroll, setEventScroll] = useState(null);
 
 	const scrollToNextSection = () => {
 		setCurrentSlide((prev) => (prev < itemsRef.current.length - 1 ? prev + 1 : prev));
@@ -73,22 +102,36 @@ const Home = () => {
 	const scrollToPreviousSection = () => {
 		setCurrentSlide((prev) => (prev > 0 ? prev - 1 : prev));
 	};
-	console.log('currentSlide', currentSlide);
+
 	useEffect(() => {
+		console.log('scrollable', scrollable);
 		const handler = (event) => {
-			event.preventDefault();
-			if (event.deltaY > 0) {
-				scrollToNextSection();
-			} else {
-				scrollToPreviousSection();
+			if (!scrollable) {
+				event.preventDefault();
+				return;
 			}
+			event.preventDefault();
+			setEventScroll(event);
+			return;
 		};
 		window.addEventListener('wheel', handler, { passive: false });
 
 		return () => {
 			window.removeEventListener('wheel', handler);
 		};
-	}, []);
+	}, [scrollable]);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			if (eventScroll.deltaY > 0) {
+				scrollToNextSection();
+			} else {
+				scrollToPreviousSection();
+			}
+		}, 150);
+
+		return () => clearTimeout(timeout);
+	}, [eventScroll]);
 
 	useEffect(() => {
 		if (itemsRef.current.length > 0) {
@@ -99,103 +142,12 @@ const Home = () => {
 
 	return (
 		<>
-			{slides.map(({ Component, props }, index) => (
-				<Slide key={index} {...props} ref={(el) => (itemsRef.current[index] = el)}>
-					<Component />
+			{slides.map(({ Component, componentProps, slideProps }, index) => (
+				<Slide key={index} {...slideProps} ref={(el) => (itemsRef.current[index] = el)}>
+					<Component {...componentProps} setScrollable={setScrollable} />
 				</Slide>
 			))}
 		</>
-	);
-};
-
-const Home2 = () => {
-	const itemsRef = useRef([]);
-	const [currentSlide, setCurrentSlide] = useState(1);
-
-	function scrollToNextSection() {
-		setCurrentSlide((prev) => {
-			if (prev === slides.length) return prev;
-			return prev + 1;
-		});
-	}
-
-	function scrollToPreviousSection() {
-		setCurrentSlide((prev) => {
-			if (prev === 1) return prev;
-			return prev - 1;
-		});
-	}
-
-	useEffect(() => {
-		const handler = (event) => {
-			if (event.deltaY > 0) {
-				scrollToNextSection();
-			} else {
-				scrollToPreviousSection();
-			}
-		};
-		document.addEventListener('wheel', handler);
-
-		return () => {
-			document.removeEventListener('wheel', handler);
-		};
-	}, []);
-
-	useEffect(() => {
-		if (itemsRef.current.length === 0) return;
-
-		const slide = itemsRef.current[currentSlide - 1];
-		console.log('slide to scroll', slide);
-		console.log('currentSlide', currentSlide);
-		slide.scrollIntoView({ behavior: 'smooth' });
-	}, [currentSlide]);
-
-	return (
-		<>
-			{slides.map(({ Component, props }, index) => (
-				<Slide key={index} {...props} ref={(el) => (itemsRef.current[index] = el)}>
-					<Component />
-				</Slide>
-			))}
-		</>
-		// <>
-		// 	<Slide>
-		// 		<Welcome />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<OurVision />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<KeyFeatures />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<AboutUs />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<AboutUsMore />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<AboutUsMore selectedLink={1} />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<AboutUsMore selectedLink={2} />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<AboutUsMore selectedLink={3} />
-		// 	</Slide>
-		// 	<Slide className={styles.adminPanel}>
-		// 		<AdminPanel />
-		// 	</Slide>
-		// 	<Slide className={styles.docs}>
-		// 		<Documentation />
-		// 	</Slide>
-		// 	<Slide className={styles.reg}>
-		// 		<Registration />
-		// 	</Slide>
-		// 	<Slide>
-		// 		<Achievements />
-		// 	</Slide>
-		// </>
 	);
 };
 

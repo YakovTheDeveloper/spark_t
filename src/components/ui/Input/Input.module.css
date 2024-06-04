@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.container label {
+    padding-left: 20px;
+}
+
+.wrapper {
+    height: 52px;
+    display: flex;
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.wrapper input {
+    background: transparent;
+    border: none;
+    padding: 16px 10px 16px 20px;
+    color: #fff;
+    outline: none;
+    flex-grow: 1;
+}
+
+.wrapper button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
