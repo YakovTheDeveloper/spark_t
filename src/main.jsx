@@ -4,9 +4,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import Root from './root';
 import Home from './components/pages/Home';
-import OurVision from './components/pages/OurVision/OurVision';
-import KeyFeatures from './components/pages/KeyFeatures/KeyFeatures';
-import AboutUs from './components/pages/AboutUs/AboutUs';
 
 const router = createBrowserRouter([
 	{
@@ -15,26 +12,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: (
-					<>
-						<Home />
-						<OurVision />,
-						<KeyFeatures />
-						<AboutUs />
-					</>
-				),
-			},
-			{
-				path: '/vision',
-				element: <OurVision />,
-			},
-			{
-				path: '/keys',
-				element: <KeyFeatures />,
-			},
-			{
-				path: '/about',
-				element: <AboutUs />,
+				element: <Home />,
 			},
 		],
 	},

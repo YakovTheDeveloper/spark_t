@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    padding-top: 15%;
+    justify-content: space-between;
+}
+
+.choose {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formContainer {
+    display: none;
+}
+
+.choice {
+    width: fit-content;
+    display: flex;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.43);
+    border-radius: 11px;
+}
+
+
+
+.choiceItem {
+    user-select: none;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 26px 90px;
+    border-radius: 7px;
+    color: black;
+    cursor: pointer;
+    /* opacity: 0; */
+}
+
+.choiceItem:has(input:checked) {
+    color: rgba(0, 163, 255, 1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.choiceItem input {
+    width: 0;
+    height: 0;
+}
+
+.container:has(input[id='Validator']:checked) .validatorForm {
+    display: flex;
+}
+
+.container:has(input[id='Searcher']:checked) .searcherForm {
+    display: flex;
+}

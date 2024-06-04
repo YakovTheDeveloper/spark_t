@@ -1,0 +1,74 @@
+.text {
+    padding-top: unset;
+    margin-right: 10%;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 43px;
+    font-size: 36px;
+    width: 600px;
+}
+
+.container {
+    margin: 0 auto;
+    padding-top: unset;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 46px;
+    height: 100%;
+    position: relative;
+    flex-grow: 1;
+}
+
+.container a {
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 63px;
+}
+
+.links {
+    bottom: 100px;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+}
+
+.info {
+    padding-top: 120px;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 43px;
+    margin-left: auto;
+    width: 600px;
+}
+
+.link {
+    color: #fff;
+}
+
+.unselectedLink {
+    color: rgba(255, 255, 255, 0.44);
+}
+
+.selectedLink {
+    color: #fff;
+    text-decoration: underline;
+    position: relative;
+}
+
+.selectedLink:after {
+    content: '';
+    background: url('../../../assets/blur/blur-text-choice.png') center no-repeat;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+}
+
+.about {
+    font-size: 24px;
+}

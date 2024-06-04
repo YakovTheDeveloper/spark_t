@@ -1,38 +1,56 @@
 import React from 'react';
 import styles from './Home.module.css';
-import Logo from '../../assets/logo.png';
-import Blur2 from '../../assets/blur/blur2.png';
-import Blur from '../../assets/blur/blur1.png';
+import Slide from '../ui/Slide/Slide';
+import AboutUsMore from './AboutUsMore/AboutUsMore';
+import AdminPanel from './AdminPanel/AdminPanel';
+import OurVision from './OurVision/OurVision';
+import KeyFeatures from './KeyFeatures/KeyFeatures';
+import Welcome from './Welcome/Welcome';
+import AboutUs from './AboutUs/AboutUs';
+import Documentation from './Documentation/Documentation';
+import Registration from './Registration/Registration';
+import Achievements from './Achievements/Achievements';
 
 const Home = () => {
 	return (
-		<div className={styles.container}>
-			<img src={Blur} className={styles.blur}></img>
-			<img src={Blur2} className={styles.blur2}></img>
-			<div className={styles.inner}>
-				<div className={styles.brandContainer}>
-					<h1>Welcome to</h1>
-				</div>
-				<img src={Logo} alt='logo' />
-				<div className={styles.brandContainer}>
-					<p className={styles.brand}>spark-t</p>
-					<p
-						className={styles.info}
-						style={{
-							position: 'absolute',
-						}}
-					>
-						<span>Unlock full potential of being</span>
-						<span>a validator with us</span>
-					</p>
-				</div>
-			</div>
-			<div className={styles.bottom}>
-				<p className={styles.info}>
-					Empowering Validators on Solana with <span>Spark-T MEV Infrastructure</span>
-				</p>
-			</div>
-		</div>
+		<>
+			<Slide>
+				<Welcome />
+			</Slide>
+			<Slide>
+				<OurVision />
+			</Slide>
+			<Slide>
+				<KeyFeatures />
+			</Slide>
+			<Slide>
+				<AboutUs />
+			</Slide>
+			<Slide>
+				<AboutUsMore />
+			</Slide>
+			<Slide>
+				<AboutUsMore selectedLink={1} />
+			</Slide>
+			<Slide>
+				<AboutUsMore selectedLink={2} />
+			</Slide>
+			<Slide>
+				<AboutUsMore selectedLink={3} />
+			</Slide>
+			<Slide className={styles.adminPanel}>
+				<AdminPanel />
+			</Slide>
+			<Slide className={styles.docs}>
+				<Documentation />
+			</Slide>
+			<Slide className={styles.reg}>
+				<Registration />
+			</Slide>
+			<Slide>
+				<Achievements />
+			</Slide>
+		</>
 	);
 };
 

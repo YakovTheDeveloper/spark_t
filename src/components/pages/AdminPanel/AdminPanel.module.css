@@ -1,0 +1,21 @@
+.text {
+    font-weight: 500;
+    line-height: 30px;
+    font-size: 24px;
+    width: 600px;
+}
+
+.container {
+    padding-top: unset;
+    height: 100%;
+    width: 30%;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 35%;
+}
+
+.container img {
+    position: absolute;
+}
