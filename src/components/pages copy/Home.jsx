@@ -18,6 +18,7 @@ const Home = () => {
 						className={styles.info}
 						style={{
 							position: 'absolute',
+							top: '10px',
 						}}
 					>
 						<span>Unlock full potential of being</span>

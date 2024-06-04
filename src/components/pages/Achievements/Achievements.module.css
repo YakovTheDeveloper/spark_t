@@ -14,9 +14,12 @@
     display: flex;
     gap: 12px;
     overflow: auto;
+    flex-grow: 1;
+    height: 600px;
 }
 
 .item {
+    position: relative;
     padding-top: 5%;
     min-width: 350px;
     width: 350px;
@@ -33,4 +36,13 @@
 
 .item p {
     color: rgba(255, 255, 255, 0.53);
+}
+
+.blur {
+    position: absolute;
+    bottom: 45%;
+    transform: scale(1.5);
+    left: -30%;
+    /* left: 0; */
+    /* width: 1000px; */
 }
