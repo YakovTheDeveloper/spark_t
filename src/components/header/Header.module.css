@@ -1,10 +1,11 @@
 .container {
     max-width: 1440px;
-    width: 100%;
+    min-width: 100%;
     z-index: 1;
+    margin: 0 auto;
     display: flex;
-    padding: 40px 90px 0;
-    position: relative;
+    padding: 0 90px 0;
+    margin-top: 40px;
     justify-content: space-between;
     position: fixed;
 }
@@ -30,4 +31,62 @@
 
 .logo {
     margin-left: 10%;
+}
+
+.mobileMenuButton {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerMenu {}
+
+.menuMobileLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(4, 9, 33, 1);
+    padding: 26px 26px 0 26px;
+}
+
+
+.menuListMobile {
+    display: flex;
+    flex-direction: column;
+    gap: 30px
+}
+
+.logoSmall {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+@media(max-width: 391px) {
+    .container {
+        /* display: none; */
+        height: 70px;
+        padding: 0 26px 0 26px;
+        margin-top: 16px;
+    }
+
+    .container .list, .container .regButton {
+        display: none;
+    }
+
+    .containerMobile {
+        display: flex;
+    }
+
+    .mobileMenuButton {
+        display: flex;
+    }
 }

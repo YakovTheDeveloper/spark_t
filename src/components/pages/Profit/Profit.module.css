@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    /* justify-content: center; */
+    height: 100%;
+    padding-top: 15%;
+    gap: 40px;
+    padding-left: var(--padding-desktop-container-horizontal);
+    padding-right: var(--padding-desktop-container-horizontal);
+    /* background: rgb(12, 26, 97, 0.5); */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container h1 {
+    font-size: 52px;
+    line-height: 63px;
+}
+
+.text {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.content {
+    display: flex;
+    gap: 60px;
+}
+
+.result {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.result p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 32px;
+}
+
+.result .willReceive {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 24px;
+}
+
+.inputContainer {
+
+    width: 506px;
+}

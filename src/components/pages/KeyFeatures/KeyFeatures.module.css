@@ -1,7 +1,8 @@
 .container {
-    margin: 0 auto;
-    padding-top: 6%;
-    width: 90%;
+    padding-left: var(--padding-desktop-container-horizontal);
+    padding-right: var(--padding-desktop-container-horizontal);
+    padding-top: 15%;
+    width: 100%;
     gap: 30px;
     display: flex;
     flex-direction: column;
@@ -10,16 +11,23 @@
 
 .features {
     display: flex;
+    position: relative;
     gap: 12px;
 }
 
 .box {
+
     background-color: rgba(255, 255, 255, 0.12);
     padding: 24px 24px 30px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    opacity: 0;
+
+    animation-fill-mode: forwards;
+    --box-animation-delay: 350ms;
+    --box-animation-duration: 2.1s;
 }
 
 .box h2 {
@@ -32,4 +40,154 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
+}
+
+.box-1, .box-2, .box-3, .box-4, .box-5 {
+    animation-name: appear;
+    animation-duration: var(--box-animation-duration);
+}
+
+
+.box-1 {
+    animation-delay: calc(0 * var(--box-animation-delay));
+}
+
+.box-2 {
+    animation-delay: calc(1 * var(--box-animation-delay));
+
+}
+
+.box-3 {
+    animation-delay: calc(2 * var(--box-animation-delay));
+}
+
+.box-4 {
+    animation-delay: calc(3 * var(--box-animation-delay));
+}
+
+.box-5 {
+    animation-delay: calc(4 * var(--box-animation-delay));
+}
+
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+.ball {
+    animation-fill-mode: forwards;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: -1000px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    background: color(display-p3 1.000 1.000 1.000);
+    box-shadow: 0px 0px 1701.68px #00BEFD, 0px 0px 972.389px #00BEFD, 0px 0px 567.227px #00BEFD, 0px 0px 283.614px #00BEFD, 0px 0px 81.0324px #00BEFD, 0px 0px 40.5162px #00BEFD;
+    box-shadow: 0px 0px 1701.68px color(display-p3 0.031 0.733 0.969), 0px 0px 972.389px color(display-p3 0.031 0.733 0.969), 0px 0px 567.227px color(display-p3 0.031 0.733 0.969), 0px 0px 283.614px color(display-p3 0.031 0.733 0.969), 0px 0px 81.0324px color(display-p3 0.031 0.733 0.969), 0px 0px 40.5162px color(display-p3 0.031 0.733 0.969);
+    filter: blur(5.45px);
+    transform: translateY(-50%);
+}
+
+
+.ballAnimated {
+    animation-name: ball;
+    animation-duration: 1.95s;
+    -webkit-animation-name: ball;
+    -webkit-animation-duration: 1.95s;
+}
+
+
+@keyframes ball {
+    0% {
+        left: -1000px;
+        display: block;
+    }
+
+    5% {
+        left: 5%;
+    }
+
+    50% {
+        left: 40%;
+    }
+
+    100% {
+        left: 120%;
+        display: none;
+    }
+}
+
+.ballLine {
+    /* display: none; */
+    animation-name: ball-line;
+    animation-duration: var(--box-animation-duration);
+    position: absolute;
+    top: 50%;
+    left: -1000px;
+    width: 10000px;
+    transform: translateX(-100%);
+    height: 1px;
+    background: white;
+    box-shadow: 0px 0px 1701.68px #00BEFD, 0px 0px 972.389px #00BEFD, 0px 0px 567.227px #00BEFD, 0px 0px 283.614px #00BEFD, 0px 0px 81.0324px #00BEFD, 0px 0px 40.5162px #00BEFD;
+    box-shadow: 0px 0px 1701.68px color(display-p3 0.031 0.733 0.969), 0px 0px 972.389px color(display-p3 0.031 0.733 0.969), 0px 0px 567.227px color(display-p3 0.031 0.733 0.969), 0px 0px 283.614px color(display-p3 0.031 0.733 0.969), 0px 0px 81.0324px color(display-p3 0.031 0.733 0.969), 0px 0px 40.5162px color(display-p3 0.031 0.733 0.969);
+    filter: blur(5.45px);
+
+}
+
+.ballLineAnimated {
+    animation-name: ball-line;
+    animation-duration: 2.3s;
+    -webkit-animation-name: ball-line;
+    -webkit-animation-duration: 2.3s;
+}
+
+@keyframes ball-line {
+    0% {
+        left: -1000px;
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0.5;
+        left: 5%;
+    }
+
+    50% {
+        opacity: 1;
+        left: 40%;
+    }
+
+    100% {
+        opacity: 0;
+        left: 120%;
+        display: none;
+    }
+}
+
+
+
+@media(max-width: 391px) {
+    .container {
+        gap: 20px;
+        padding-top: 30%;
+        padding-left: var(--padding-mobile-container-horizontal);
+        padding-right: var(--padding-mobile-container-horizontal);
+    }
+
+    .features {
+        flex-direction: column;
+    }
+
+
 }

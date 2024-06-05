@@ -11,66 +11,58 @@ import Documentation from './Documentation/Documentation';
 import Registration from './Registration/Registration';
 import Achievements from './Achievements/Achievements';
 import useOnScreen from '../../hooks/useOnScreen';
+import Profit from './Profit/Profit';
+import Header from '../header/Header';
 
 const slides = [
-	{
-		Component: Welcome,
-		slideProps: {},
-		componentProps: {},
-	},
+	// {
+	// 	Component: Welcome,
+	// 	slideProps: { className: styles.welcome },
+	// 	componentProps: {},
+	// },
 	// {
 	// 	Component: OurVision,
 	// 	slideProps: {},
 	// 	componentProps: {},
 	// },
-	// {
-	// 	Component: KeyFeatures,
-	// 	slideProps: {},
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: AboutUs,
-	// 	slideProps: {},
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: { selectedLink: 1 },
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: { selectedLink: 2 },
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: { selectedLink: 3 },
-	// },
-	// {
-	// 	Component: AdminPanel,
-	// 	slideProps: { className: styles.adminPanel },
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: Documentation,
-	// 	slideProps: { className: styles.docs },
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: Registration,
-	// 	slideProps: { className: styles.reg },
-	// 	componentProps: {},
-	// },
 	{
-		Component: Achievements,
+		Component: KeyFeatures,
 		slideProps: {},
+		componentProps: {},
+	},
+	{
+		Component: AboutUs,
+		slideProps: {},
+		componentProps: {},
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: {},
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: { selectedLink: 1 },
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: { selectedLink: 2 },
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: { selectedLink: 3 },
+	},
+	{
+		Component: AdminPanel,
+		slideProps: { className: styles.adminPanel },
+		componentProps: {},
+	},
+	{
+		Component: Documentation,
+		slideProps: { className: styles.docs },
 		componentProps: {},
 	},
 	{
@@ -78,15 +70,25 @@ const slides = [
 		slideProps: { className: styles.reg },
 		componentProps: {},
 	},
+	{
+		Component: Achievements,
+		slideProps: {},
+		componentProps: {},
+	},
+	{
+		Component: Profit,
+		slideProps: { className: styles.profit },
+		componentProps: {},
+	},
 ];
 
-function isInViewport(yourElement, offset = 0) {
-	if (!yourElement) return false;
-	const top = yourElement.getBoundingClientRect().top;
-	const result = top + offset >= 0 && top - offset <= window.innerHeight;
-	console.log('result', result);
-	return top + offset >= 0 && top - offset <= window.innerHeight;
-}
+// function isInViewport(yourElement, offset = 0) {
+// 	if (!yourElement) return false;
+// 	const top = yourElement.getBoundingClientRect().top;
+// 	const result = top + offset >= 0 && top - offset <= window.innerHeight;
+// 	console.log('result', result);
+// 	return top + offset >= 0 && top - offset <= window.innerHeight;
+// }
 
 const Home = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
@@ -142,11 +144,14 @@ const Home = () => {
 
 	return (
 		<>
-			{slides.map(({ Component, componentProps, slideProps }, index) => (
-				<Slide key={index} {...slideProps} ref={(el) => (itemsRef.current[index] = el)}>
-					<Component {...componentProps} setScrollable={setScrollable} />
-				</Slide>
-			))}
+			<Header currentSlide={currentSlide} />
+			<main>
+				{slides.map(({ Component, componentProps, slideProps }, index) => (
+					<Slide key={index} {...slideProps} ref={(el) => (itemsRef.current[index] = el)}>
+						<Component {...componentProps} setScrollable={setScrollable} />
+					</Slide>
+				))}
+			</main>
 		</>
 	);
 };

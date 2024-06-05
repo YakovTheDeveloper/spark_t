@@ -1,3 +1,11 @@
+.welcome {
+    background-image: url('../../assets/blur/blur1.png'), url('../../assets/blur/blur2.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position: top right, bottom left;
+    background-size: auto, 55%;
+}
+
+
 .adminPanel {
     background-image: url('../../assets/blur/blur-admin-panel.png'), url('../../assets/admin-panel.png');
     background-repeat: no-repeat, no-repeat;
@@ -16,4 +24,28 @@
     background-image: url('../../assets/blur/blur-reg.png');
     background-repeat: no-repeat;
     background-position: left;
+}
+
+
+.profit {
+    background-image: url('../../assets/blur/blur-profit.png');
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.profitSecondStep {
+    background: rgba(0, 0, 255, 0.41);
+    background-image: url('../../assets/blur/blur-profit-2.png');
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+
+@media(max-width: 391px) {
+    .welcome {
+        background-image: url('../../assets/blur/blur1-mobile.png'), url('../../assets/blur/blur2.png');
+        background-size: auto, auto;
+        background-position: top right, 80% -200%;
+    }
+
 }

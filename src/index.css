@@ -2,6 +2,7 @@
 
 :root {
     --padding-desktop-container-horizontal: 90px;
+    --padding-mobile-container-horizontal: 26px;
 }
 
 /*
@@ -103,4 +104,17 @@ p {
     font-weight: 500;
     line-height: 29px;
     font-size: 24px;
+}
+
+
+@media(max-width: 391px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    p {
+        font-weight: 500;
+        line-height: 19px;
+        font-size: 16px;
+    }
 }
