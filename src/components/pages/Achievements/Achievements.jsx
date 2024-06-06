@@ -4,11 +4,35 @@ import Blur from '../../../assets/blur/blur-achievements.png';
 import useOnScreen from '../../../hooks/useOnScreen';
 import classNames from 'classnames';
 
-const Item = ({ children, className, style }) => {
+const items = [
+	{
+		title: '$5M Paid to Solana Validators',
+		content: 'Over the course of our operations, we have paid Solana validators more than $5 million.',
+	},
+	{
+		title: '5+ MEV Strategies',
+		content: 'We employ over five different MEV strategies to maximize efficiency and returns.',
+	},
+	{
+		title: '150+ Connected Validators',
+		content: 'Join the growing network of over 150 connected validators.',
+	},
+	{
+		title: '75+ Searchers',
+		content: 'Be part of the community with more than 75 active searchers.',
+	},
+	{
+		title: '4+ Years in MEV Market',
+		content: 'Leverage our extensive experience in the MEV market.',
+	},
+];
+
+const Item = ({ children, className, style, item }) => {
+	const { title, content } = item;
 	return (
 		<div className={classNames(styles.item, className)} style={style}>
-			<h2>$5M Paid to Solana Validators</h2>
-			<p>Since the launch of Spark-t, we brought Solana validators more than $5 million.</p>
+			<h2>{title}</h2>
+			<p>{content}</p>
 			{children}
 		</div>
 	);
@@ -116,8 +140,9 @@ const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 		<div className={styles.container} ref={ref}>
 			<h1 ref={titleRef}>Statistics and Achievements</h1>
 			<div className={styles.items} ref={achievementItemsRef}>
-				{[1, 2, 3, 4, 5].map((item, index) => (
+				{items.map((item, index) => (
 					<Item
+						item={item}
 						className={index === currentItem && styles.itemSelected}
 						style={{
 							opacity: opacity(index),

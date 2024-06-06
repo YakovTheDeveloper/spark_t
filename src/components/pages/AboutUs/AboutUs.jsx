@@ -1,8 +1,5 @@
 import React from 'react';
 import styles from './AboutUs.module.css';
-import Mask from '../../../assets/blur/blur-mask-group-about-us.png';
-import Mask2 from '../../../assets/blur/blur3-mask.png';
-import Mask3 from '../../../assets/blur/blur-mask-group-about-us.png';
 
 const AboutUs = () => {
 	return (

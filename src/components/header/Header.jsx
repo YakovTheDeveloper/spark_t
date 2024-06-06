@@ -14,7 +14,7 @@ const MenuList = ({ className }) => {
 				<a to='/a'>Admin panel</a>
 			</li>
 			<li>
-				<a to='/b'>о HOW TO CONNECT</a>
+				<a to='/b'>HOW TO CONNECT</a>
 			</li>
 			{/* <div className={styles.logo}>
             <Logo />
@@ -38,7 +38,7 @@ const Header = ({ currentSlide }) => {
 			)}
 			{isMobileMenuOpen && (
 				<div className={styles.menuMobileLayout}>
-					<button onClick={() => setIsMobileMenuOpen((prev) => !prev)}>
+					<button onClick={() => setIsMobileMenuOpen((prev) => !prev)} style={{ marginRight: 'auto' }}>
 						<MenuIcon
 							style={{
 								width: '48px',
