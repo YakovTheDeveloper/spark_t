@@ -1,49 +1,73 @@
 .container {
     display: flex;
-    padding-top: 20%;
     justify-content: space-between;
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
+    height: 100%;
+    padding-top: 15%;
 }
 
-.choose {
+
+.reg {
+    /* padding-left: var(--padding-desktop-container-horizontal); */
     display: flex;
     flex-direction: column;
     gap: 20px;
     flex-grow: 1;
-    max-width: 506px;
+    max-width: 850px;
+
+    /* transition: all 0.5s;
+    background-image: url('../../../assets/blur/blur-reg.png');
+    background-repeat: no-repeat;
+    background-position: -200px 2%; */
 }
 
-.formContainer {
-    display: none;
-    flex-direction: column;
-    gap: 32px;
+.blurChoice {
+    width: 800px;
+    height: 550px;
+    position: absolute;
+    top: 90%;
+    transform: translateY(-50%);
+    left: -50%;
+    background-image: url('../../../assets/blur/blur-reg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: all 0.5s;
+    z-index: -1;
+}
+
+.right {
+    left: 0%;
+}
+
+.hide {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
 }
 
 .choice {
-    width: fit-content;
     display: flex;
+    position: relative;
+    max-width: 556px;
     padding: 4px;
     background: rgba(255, 255, 255, 0.43);
     border-radius: 11px;
 }
 
-
-
 .choiceItem {
-    user-select: none;
-    font-size: 24px;
-    font-weight: 500;
-    padding: 26px 90px;
-    border-radius: 7px;
-    color: black;
-    cursor: pointer;
-    /* opacity: 0; */
+    transition: background-color 0.3s ease-in-out;
+
 }
 
-.choiceItem:has(input:checked) {
+.choice .chosenItem {
     color: rgba(0, 163, 255, 1);
-    background: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.choice .choiceItem:not(.chosenItem) {
+    background-color: transparent;
 }
 
 .choiceItem input {
@@ -52,18 +76,86 @@
 }
 
 .text {
-    display: none;
+    max-width: 550px;
 }
 
-.container:has(input[id='Validator']:checked) .validatorForm, .container:has(input[id='Validator']:checked) .textValidator {
-    display: flex;
-}
-
-.container:has(input[id='Searcher']:checked) .searcherForm, .container:has(input[id='Searcher']:checked) .textSearcher {
-    display: flex;
+.textSearcher, .textValidator {
+    transition: all 0.3s ease-in-out;
 }
 
 .forms {
+    /* transition: all 0.3s ease-in-out; */
     max-width: 506px;
     flex-grow: 1;
+    position: relative;
+    transition: all 0.3s ease-in-out;
 }
+
+.formContainer {
+    top: 0;
+    height: 0;
+    position: relative;
+    flex-direction: column;
+    visibility: hidden;
+    display: flex;
+    gap: 32px;
+    opacity: 0.55;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.show {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
+
+@media(max-width: 391px) {
+
+    .container {
+        flex-direction: column;
+        padding-left: var(--padding-mobile-container-horizontal);
+        padding-right: var(--padding-mobile-container-horizontal);
+        gap: 24px;
+        padding-top: 100px;
+
+    }
+
+    .reg {
+        gap: 8px;
+        flex-grow: 0;
+    }
+
+    .reg h1 {
+        width: 100%;
+        text-align: left;
+    }
+
+
+    .blurChoice {
+        height: 300px;
+        left: -100%;
+    }
+
+    .right {
+        left: -50%;
+    }
+
+    .formContainer {
+        gap: 16px;
+    }
+
+
+
+
+}
+
+
+/* @keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+} */

@@ -1,57 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Registration.module.css';
 import classNames from 'classnames';
 import Input from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
 
-const ValidatorForm = () => {
+const ValidatorForm = ({ className }) => {
 	return (
-		<form action='POST' className={classNames(styles.formContainer, styles.validatorForm)}>
-			<Input label={'Specify the Identity of your validator(s)'} />
-			<Input label={'Provide the desired address for payouts'} />
-			<Input label={'Your Telegram '} />
+		<form action='POST' className={classNames(styles.formContainer, className)}>
+			<Input className={styles.formInput} label={'Specify the Identity of your validator(s)'} />
+			<Input className={styles.formInput} label={'Provide the desired address for payouts'} />
+			<Input className={styles.formInput} label={'Your Telegram '} />
 			<Button>Submit</Button>
+
+			{/* <Button>Submit</Button> */}
 		</form>
 	);
 };
 
-const SearcherForm = () => {
+const SearcherForm = ({ className }) => {
 	return (
-		<form action='POST' className={classNames(styles.formContainer, styles.searcherForm)}>
-			<Input label={'Describe your experience and the strategies you would like to implement using our mempool'} />
-			<Input label={'Your Telegram '} />
+		<form action='POST' className={classNames(styles.formContainer, className)}>
+			<Input
+				className={styles.formInput}
+				label={'Describe your experience and the strategies you would like to implement using our mempool'}
+			/>
+			<Input className={styles.formInput} label={'Your Telegram '} />
 			<Button>Submit</Button>
 		</form>
 	);
 };
 
 const Registration = () => {
+	const [choice, setChoice] = useState('validator');
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.choose}>
+			<div className={classNames(styles.reg)}>
 				<h1>Registration</h1>
-				<div className={styles.choice}>
-					<label for='Validator' className={styles.choiceItem}>
+				<div className={classNames(styles.choice)}>
+					<div className={classNames(styles.blurChoice, choice === 'searcher' && styles.right)} />
+					<Button
+						onClick={() => setChoice('validator')}
+						className={classNames(styles.choiceItem, choice === 'validator' && styles.chosenItem)}
+					>
 						Validator
-						<input type='radio' id='Validator' name='choice' value='Validator' checked />
-					</label>
-					<label for='Searcher' className={styles.choiceItem}>
+					</Button>
+					<Button
+						onClick={() => setChoice('searcher')}
+						className={classNames(styles.choiceItem, choice === 'searcher' && styles.chosenItem)}
+					>
 						Searcher
-						<input type='radio' id='Searcher' name='choice' value='Searcher' />
-					</label>
-					{/* <button className={styles.choiceItem}>Validator</button> */}
-					{/* <button className={styles.choiceItem}>Searcher</button> */}
+					</Button>
 				</div>
-				<p className={classNames(styles.text, styles.textValidator)}>
+
+				<p className={classNames(styles.text, choice !== 'validator' && styles.hide)}>
 					Join our network by registering as a validator and submitting your server location.
 				</p>
-				<p className={classNames(styles.text, styles.textSearcher)}>
+				<p className={classNames(styles.text, choice !== 'searcher' && styles.hide)}>
 					Sign up as a searcher to access our open mempool and contribute to the MEV ecosystem.
 				</p>
 			</div>
 			<div className={styles.forms}>
-				<ValidatorForm />
-				<SearcherForm />
+				<ValidatorForm className={classNames(choice === 'validator' && styles.show)} />
+				<SearcherForm className={classNames(choice === 'searcher' && styles.show)} />
 			</div>
 		</div>
 	);

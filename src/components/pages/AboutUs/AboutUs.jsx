@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './AboutUs.module.css';
-import Blur from '../../../assets/blur/blur3.png';
-import Blur2 from '../../../assets/blur/blur3-mask.png';
+import Mask from '../../../assets/blur/blur-mask-group-about-us.png';
+import Mask2 from '../../../assets/blur/blur3-mask.png';
+import Mask3 from '../../../assets/blur/blur-mask-group-about-us.png';
 
 const AboutUs = () => {
 	return (
-		<div className={styles.container}>
-			<div className={styles.inner}>
-				<div>
+		<>
+			<div className={styles.container}>
+				<div className={styles.content}>
 					<h1>about us</h1>
 					<p className={styles.text}>
 						Since 2020, our team has been a leading searcher in the Ethereum ecosystem. With the advent of MEV on
@@ -15,17 +16,8 @@ const AboutUs = () => {
 						expertise to benefit validators and searchers alike.
 					</p>
 				</div>
-				<img
-					src={Blur}
-					alt='background'
-					style={{
-						mixBlendMode: 'color-burn',
-					}}
-					className={styles.blur1}
-				/>
 			</div>
-			<img src={Blur2} alt='background' className={styles.blur2} />
-		</div>
+		</>
 	);
 };
 

@@ -1,6 +1,8 @@
 .container {
-    padding-top: 10%;
-    /* height: 100%; */
+    padding-top: 15%;
+    padding-left: var(--padding-desktop-container-horizontal);
+    padding-right: var(--padding-desktop-container-horizontal);
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

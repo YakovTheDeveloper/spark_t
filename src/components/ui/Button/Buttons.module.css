@@ -5,10 +5,22 @@
     font-size: 24px;
     font-weight: 500;
     padding: 26px 90px;
-    border-radius: 7px;
+    border-radius: 12px;
     color: black;
     cursor: pointer;
     background: rgba(255, 255, 255, 1);
     align-items: center;
     justify-content: center;
+}
+
+
+@media(max-width: 391px) {
+
+    .container {
+        border-radius: 7px;
+        padding: 12px 43px;
+        font-size: 16px;
+        line-height: auto;
+    }
+
 }

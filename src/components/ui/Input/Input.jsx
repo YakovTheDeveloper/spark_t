@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Input.module.css';
 import CrossIcon from '../../../assets/icons/cross-icon.svg?react';
-const Input = ({ label, value, onChange, onClear, ...props }) => {
+import classNames from 'classnames';
+const Input = ({ label, value, onChange, onClear, className, ...props }) => {
 	const [inputValue, setInputValue] = useState(value || '');
 
 	const handleChange = (event) => {
@@ -15,7 +16,7 @@ const Input = ({ label, value, onChange, onClear, ...props }) => {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={classNames(styles.container, className)}>
 			<label htmlFor='input'>{label}</label>
 			<div className={styles.wrapper}>
 				<input {...props} id='input' type='text' value={inputValue} onChange={handleChange} />

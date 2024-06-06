@@ -25,46 +25,48 @@ const slides = [
 	// 	slideProps: {},
 	// 	componentProps: {},
 	// },
-	{
-		Component: KeyFeatures,
-		slideProps: {},
-		componentProps: {},
-	},
-	{
-		Component: AboutUs,
-		slideProps: {},
-		componentProps: {},
-	},
-	{
-		Component: AboutUsMore,
-		slideProps: {},
-		componentProps: {},
-	},
-	{
-		Component: AboutUsMore,
-		slideProps: {},
-		componentProps: { selectedLink: 1 },
-	},
-	{
-		Component: AboutUsMore,
-		slideProps: {},
-		componentProps: { selectedLink: 2 },
-	},
-	{
-		Component: AboutUsMore,
-		slideProps: {},
-		componentProps: { selectedLink: 3 },
-	},
-	{
-		Component: AdminPanel,
-		slideProps: { className: styles.adminPanel },
-		componentProps: {},
-	},
-	{
-		Component: Documentation,
-		slideProps: { className: styles.docs },
-		componentProps: {},
-	},
+	// {
+	// 	Component: KeyFeatures,
+	// 	slideProps: {},
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: AboutUs,
+	// 	slideProps: {
+	// 		className: styles.aboutUs,
+	// 	},
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: { selectedLink: 1 },
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: { selectedLink: 2 },
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {},
+	// 	componentProps: { selectedLink: 3 },
+	// },
+	// {
+	// 	Component: AdminPanel,
+	// 	slideProps: { className: styles.adminPanel },
+	// 	componentProps: {},
+	// },
+	// {
+	// 	Component: Documentation,
+	// 	slideProps: { className: styles.docs },
+	// 	componentProps: {},
+	// },
 	{
 		Component: Registration,
 		slideProps: { className: styles.reg },
@@ -98,20 +100,24 @@ const Home = () => {
 	const [eventScroll, setEventScroll] = useState(null);
 
 	const scrollToNextSection = () => {
-		setCurrentSlide((prev) => (prev < itemsRef.current.length - 1 ? prev + 1 : prev));
+		setCurrentSlide((prev) => {
+			return prev < itemsRef.current.length - 1 ? prev + 1 : prev;
+		});
 	};
 
 	const scrollToPreviousSection = () => {
-		setCurrentSlide((prev) => (prev > 0 ? prev - 1 : prev));
+		setCurrentSlide((prev) => {
+			return prev > 0 ? prev - 1 : prev;
+		});
+	};
+
+	const scrollSlide = (dir) => {
+		if (currentSlide === 1) return;
+		return dir === 'next' ? scrollToNextSection() : scrollToPreviousSection();
 	};
 
 	useEffect(() => {
-		console.log('scrollable', scrollable);
 		const handler = (event) => {
-			if (!scrollable) {
-				event.preventDefault();
-				return;
-			}
 			event.preventDefault();
 			setEventScroll(event);
 			return;
@@ -121,21 +127,18 @@ const Home = () => {
 		return () => {
 			window.removeEventListener('wheel', handler);
 		};
-	}, [scrollable]);
+	}, []);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
-			if (eventScroll.deltaY > 0) {
-				scrollToNextSection();
-			} else {
-				scrollToPreviousSection();
-			}
+			eventScroll.deltaY > 0 ? scrollSlide('next') : scrollSlide('prev');
 		}, 150);
 
 		return () => clearTimeout(timeout);
 	}, [eventScroll]);
 
 	useEffect(() => {
+		console.log('currentSlide', currentSlide);
 		if (itemsRef.current.length > 0) {
 			const slide = itemsRef.current[currentSlide];
 			slide.scrollIntoView({ behavior: 'smooth' });
@@ -148,7 +151,12 @@ const Home = () => {
 			<main>
 				{slides.map(({ Component, componentProps, slideProps }, index) => (
 					<Slide key={index} {...slideProps} ref={(el) => (itemsRef.current[index] = el)}>
-						<Component {...componentProps} setScrollable={setScrollable} />
+						<Component
+							{...componentProps}
+							setScrollable={setScrollable}
+							scrollToNextSection={scrollToNextSection}
+							scrollToPreviousSection={scrollToPreviousSection}
+						/>
 					</Slide>
 				))}
 			</main>

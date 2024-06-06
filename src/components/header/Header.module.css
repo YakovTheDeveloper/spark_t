@@ -4,7 +4,9 @@
     z-index: 1;
     margin: 0 auto;
     display: flex;
-    padding: 0 90px 0;
+    padding: 0;
+    padding-left: var(--padding-desktop-container-horizontal);
+    padding-right: var(--padding-desktop-container-horizontal);
     margin-top: 40px;
     justify-content: space-between;
     position: fixed;
@@ -76,6 +78,8 @@
         height: 70px;
         padding: 0 26px 0 26px;
         margin-top: 16px;
+        padding-left: var(--padding-mobile-container-horizontal);
+        padding-right: var(--padding-mobile-container-horizontal);
     }
 
     .container .list, .container .regButton {
