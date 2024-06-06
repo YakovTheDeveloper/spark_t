@@ -1,35 +1,63 @@
 .container {
-    padding-top: 15%;
-    padding-left: var(--padding-desktop-container-horizontal);
-    padding-right: var(--padding-desktop-container-horizontal);
+    /* padding-left: var(--padding-desktop-container-horizontal);
+    padding-right: var(--padding-desktop-container-horizontal); */
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
+    position: relative;
+}
+
+.container ::-webkit-scrollbar {
+    display: none;
 }
 
 .container h1 {
-    max-width: fit-content;
-    margin: 0 auto;
+    width: 100%;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    text-align: center;
 }
 
 .items {
+    height: 574px;
+    padding-top: 12%;
+    padding-right: var(--padding-desktop-container-horizontal);
     display: flex;
+    align-items: center;
     gap: 12px;
     overflow: auto;
-    flex-grow: 1;
-    height: 600px;
+    overflow-y: hidden;
+    margin: auto 0;
 }
 
 .item {
     position: relative;
-    padding-top: 5%;
     min-width: 350px;
     width: 350px;
     display: flex;
     flex-direction: column;
+    /* height: fit-content; */
+
+    /* display: flex;
+    flex-direction: column; */
     gap: 17px;
+
+    /* top: 90%; */
+    /* background-repeat: no-repeat;
+    background-position: center;
+    background-size: 150%;
+    background-image: url('../../../assets/blur/blur-achievements.png'); */
+
+
+}
+
+.item:first-child {
+    width: 440px;
+    min-width: 440px;
+    padding-left: var(--padding-desktop-container-horizontal);
 }
 
 .item h2 {
@@ -42,11 +70,58 @@
     color: rgba(255, 255, 255, 0.53);
 }
 
-.blur {
+.itemSelected:after {
+    content: '';
+    width: 800px;
+    height: 700px;
     position: absolute;
-    bottom: 45%;
-    transform: scale(1.5);
-    left: -30%;
-    /* left: 0; */
-    /* width: 1000px; */
+    top: 20%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    /* top: 90%; */
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    background-image: url('../../../assets/blur/blur-achievements.png');
+    z-index: -1;
+}
+
+@media(max-width: 391px) {
+
+    .container {
+        flex-direction: column;
+        gap: 0;
+
+    }
+
+    .container h1 {
+        top: 20%;
+    }
+
+    .item {
+        min-width: 212px;
+        width: 212px;
+    }
+
+    .item:first-child {
+        min-width: 212px;
+        width: 212px;
+        padding-left: var(--padding-mobile-container-horizontal);
+    }
+
+    .item h2 {
+        font-size: 24px;
+        line-height: 120%;
+        font-weight: 500;
+    }
+
+    .itemSelected:after {
+        height: 460px;
+    }
+
+
+    .container h1 {
+        text-align: center;
+    }
+
 }

@@ -6,28 +6,32 @@ import useOnScreen from '../../../hooks/useOnScreen';
 const data = [
 	{
 		title: 'Open Mempool for Searcher',
-		content:
-			'Fair Competition: We provide an open mempool for searchers, ensuring a level playing field for all. Register as a searcher through our simple form to get started.',
+		content: `
+            We provide an open mempool for searchers, ensuring fair competition. Register 
+as a searcher through our simple form to get started
+            `,
 	},
 	{
-		title: 'Open Mempool for Searcher',
-		content:
-			'Fair Competition: We provide an open mempool for searchers, ensuring a level playing field for all. Register as a searcher through our simple form to get started.',
+		title: 'MEV Execution',
+		content: `
+            We actively execute MEV to stimulate competition within our open mempool, 
+ensuring the most efficient and fair operations
+            `,
 	},
 	{
-		title: 'Open Mempool for Searcher',
-		content:
-			'Fair Competition: We provide an open mempool for searchers, ensuring a level playing field for all. Register as a searcher through our simple form to get started.',
+		title: 'MEV Revenue Burning',
+		content: `
+        Validators have the opportunity to burn MEV revenue to boost their base APY, 
+        enhancing their overall returns.
+            `,
 	},
 	{
-		title: 'Open Mempool for Searcher',
-		content:
-			'Fair Competition: We provide an open mempool for searchers, ensuring a level playing field for all. Register as a searcher through our simple form to get started.',
-	},
-	{
-		title: 'Open Mempool for Searcher',
-		content:
-			'Fair Competition: We provide an open mempool for searchers, ensuring a level playing field for all. Register as a searcher through our simple form to get started.',
+		title: 'Optional Front-Running Inclusion',
+		content: `
+        Validators are flexible, as by connecting to our system it is possible to enable or 
+        disable the front
+        -running option based on preferences
+            `,
 	},
 ];
 

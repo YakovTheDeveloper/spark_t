@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import useOnScreen from '../../../hooks/useOnScreen';
 
 const Slide = (props, ref) => {
-	const { children, className = null } = props;
+	const { children, className = null, id = '' } = props;
 
 	return (
-		<section ref={ref} className={classNames(styles.slide, className)}>
+		<section ref={ref} className={classNames(styles.slide, id && styles[id], className)}>
 			{children}
 		</section>
 	);

@@ -1,7 +1,7 @@
 import styles from './Header.module.css';
 import MenuIcon from '../../assets/icons/menu-mobile-icon.svg?react';
 import Button from '../ui/Button/Button';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Logo from '../ui/Logo/Logo';
 
 const MenuList = ({ className }) => {
@@ -14,7 +14,7 @@ const MenuList = ({ className }) => {
 				<a to='/a'>Admin panel</a>
 			</li>
 			<li>
-				<a to='/b'>Profit calculator</a>
+				<a to='/b'>о HOW TO CONNECT</a>
 			</li>
 			{/* <div className={styles.logo}>
             <Logo />
@@ -24,15 +24,16 @@ const MenuList = ({ className }) => {
 };
 
 const Header = ({ currentSlide }) => {
-	// const location = useLocation();
-	// const isRoot = location.pathname === '/';
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+	//12
+	const contrastLogo = currentSlide === 0 && document.body.classList.contains('end');
 
 	return (
 		<header className={styles.container}>
 			{currentSlide > 0 && (
 				<div className={styles.logoSmall}>
-					<Logo />
+					<Logo contrast={contrastLogo} />
 				</div>
 			)}
 			{isMobileMenuOpen && (

@@ -9,11 +9,11 @@ const AboutUs = () => {
 		<>
 			<div className={styles.container}>
 				<div className={styles.content}>
-					<h1>about us</h1>
+					<h1>About Us</h1>
 					<p className={styles.text}>
-						Since 2020, our team has been a leading searcher in the Ethereum ecosystem. With the advent of MEV on
+						Since 2020, our team has been a leading searcher in the Ethereum ecosystem. With the launch of MEV on
 						Solana, we have expanded our infrastructure to support and enhance the Solana network, leveraging our
-						expertise to benefit validators and searchers alike.
+						expertise to benefit both - validators and searchers
 					</p>
 				</div>
 			</div>

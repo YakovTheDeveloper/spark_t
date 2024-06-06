@@ -5,11 +5,13 @@ import Input from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
 
 const ValidatorForm = ({ className }) => {
+	const [form, setForm] = useState({});
+
 	return (
 		<form action='POST' className={classNames(styles.formContainer, className)}>
-			<Input className={styles.formInput} label={'Specify the Identity of your validator(s)'} />
-			<Input className={styles.formInput} label={'Provide the desired address for payouts'} />
-			<Input className={styles.formInput} label={'Your Telegram '} />
+			<Input value={''} className={styles.formInput} label={'Specify the Identity of your validator(s)'} />
+			<Input value={''} className={styles.formInput} label={'Provide the desired address for payouts'} />
+			<Input value={''} className={styles.formInput} label={'Your Telegram '} />
 			<Button>Submit</Button>
 
 			{/* <Button>Submit</Button> */}
@@ -18,13 +20,16 @@ const ValidatorForm = ({ className }) => {
 };
 
 const SearcherForm = ({ className }) => {
+	const [form, setForm] = useState({});
+
 	return (
 		<form action='POST' className={classNames(styles.formContainer, className)}>
 			<Input
+				value={''}
 				className={styles.formInput}
 				label={'Describe your experience and the strategies you would like to implement using our mempool'}
 			/>
-			<Input className={styles.formInput} label={'Your Telegram '} />
+			<Input value={''} className={styles.formInput} label={'Your Telegram '} />
 			<Button>Submit</Button>
 		</form>
 	);

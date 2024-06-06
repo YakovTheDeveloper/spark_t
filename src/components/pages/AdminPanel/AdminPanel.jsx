@@ -7,7 +7,7 @@ const AdminPanel = () => {
 		<div className={styles.container}>
 			<h1>Admin panel for Validatiors</h1>
 			<p className={styles.text}>
-				Our user-friendly admin panel allows for seamless management of your validator settings and MEV strategies.
+				Our user-friendly admin panel allows seamless management of your validator settings and MEV strategies.
 			</p>
 		</div>
 	);

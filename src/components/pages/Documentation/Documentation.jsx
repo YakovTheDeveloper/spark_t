@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Documentation.module.css';
 import DownloadIcon from '../../../assets/icons/download-icon.svg?react';
+import Button from '../../ui/Button/Button';
 
 const Documentation = () => {
 	return (
@@ -8,11 +9,20 @@ const Documentation = () => {
 			<div className={styles.header}>
 				<h1>Documentation</h1>
 				<p>
-					Comprehensive documentation is available to guide you through the setup and optimization of your
-					validator on our infrastructure.
+					Detailed documentation is available to guide you through the setup and optimization of your validator in
+					our system.
 				</p>
 			</div>
-			<ul className={styles.docs}>
+			<div className={styles.buttonContainer}>
+				<Button
+					style={{
+						background: 'rgba(0, 163, 255, 1)',
+					}}
+				>
+					<DownloadIcon />
+				</Button>
+			</div>
+			{/* <ul className={styles.docs}>
 				<li className={styles.doc}>
 					<p>doc1</p>
 					<button>
@@ -37,7 +47,7 @@ const Documentation = () => {
 						<DownloadIcon />
 					</button>
 				</li>
-			</ul>
+			</ul> */}
 		</div>
 	);
 };

@@ -1,4 +1,5 @@
 .container {
+    transition: all 0.5s;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -8,8 +9,37 @@
     gap: 40px;
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
-    /* background: rgb(12, 26, 97, 0.5); */
+    /* transition: background-color 0.5s, background-image 0.5s; */
+
+    background-color: rgba(0, 0, 255, 0.02);
+    background-image: url('../../../assets/blur/blur-profit-2.png');
+    background-repeat: no-repeat;
+    background-position: left;
+
 }
+
+.container-step-2 {
+    background-color: rgba(0, 0, 255, 0.25);
+    /* background-image: url('../../assets/blur/blur-profit-2.png'); */
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.container-step-3 {
+    background-color: rgba(29, 83, 137, 0.722);
+    /* background-image: url('../../assets/blur/blur-profit-2.png'); */
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.container-step-2 .result .opacityText, .container-step-3 .result .opacityText {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.container-step-2 .result p, .container-step-3 .result p {
+    color: #fff;
+}
+
 
 .header {
     display: flex;
@@ -47,12 +77,85 @@
     font-size: 32px;
 }
 
-.result .willReceive {
+.result .opacityText {
     color: rgba(255, 255, 255, 0.15);
+}
+
+.result .willReceive {
     font-size: 24px;
 }
 
-.inputContainer {
 
-    width: 506px;
+
+.inputContainer {
+    max-width: 506px;
+    flex-grow: 1;
+}
+
+.regButton {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 506px;
+    flex-grow: 1;
+}
+
+.regButton button {
+    width: 100%;
+}
+
+
+@media(max-width: 391px) {
+    .header {
+        gap: 15px;
+        padding-top: 60px;
+        max-width: 68%;
+        margin: 0 auto;
+    }
+
+
+    .header p, .header h1 {
+        text-align: center;
+    }
+
+    .container h1 {
+        font-size: 36px;
+        line-height: 120%;
+    }
+
+    .container {
+        padding-left: var(--padding-mobile-container-horizontal);
+        padding-right: var(--padding-mobile-container-horizontal);
+        gap: 24px;
+    }
+
+    .content {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .result {
+        margin-top: 15px;
+    }
+
+    .result .willReceive {
+        font-size: 16px;
+    }
+
+    .result p {
+        flex-wrap: nowrap;
+        font-size: 24px;
+    }
+
+    .spoiler {
+        width: 47px;
+        height: 18px;
+    }
+
+    .regButton {
+        align-items: flex-end;
+        padding-bottom: 50px;
+    }
+
+
 }

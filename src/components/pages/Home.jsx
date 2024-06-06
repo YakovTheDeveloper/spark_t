@@ -15,58 +15,60 @@ import Profit from './Profit/Profit';
 import Header from '../header/Header';
 
 const slides = [
-	// {
-	// 	Component: Welcome,
-	// 	slideProps: { className: styles.welcome },
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: OurVision,
-	// 	slideProps: {},
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: KeyFeatures,
-	// 	slideProps: {},
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: AboutUs,
-	// 	slideProps: {
-	// 		className: styles.aboutUs,
-	// 	},
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: { selectedLink: 1 },
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: { selectedLink: 2 },
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {},
-	// 	componentProps: { selectedLink: 3 },
-	// },
-	// {
-	// 	Component: AdminPanel,
-	// 	slideProps: { className: styles.adminPanel },
-	// 	componentProps: {},
-	// },
-	// {
-	// 	Component: Documentation,
-	// 	slideProps: { className: styles.docs },
-	// 	componentProps: {},
-	// },
+	{
+		Component: Welcome,
+		slideProps: { className: styles.welcome },
+		componentProps: {},
+	},
+	{
+		Component: OurVision,
+		slideProps: {},
+		componentProps: {},
+	},
+	{
+		Component: KeyFeatures,
+		slideProps: {
+			id: 'keyFeatures',
+		},
+		componentProps: {},
+	},
+	{
+		Component: AboutUs,
+		slideProps: {
+			className: styles.aboutUs,
+		},
+		componentProps: {},
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: {},
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: { selectedLink: 1 },
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: { selectedLink: 2 },
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {},
+		componentProps: { selectedLink: 3 },
+	},
+	{
+		Component: AdminPanel,
+		slideProps: { className: styles.adminPanel },
+		componentProps: {},
+	},
+	{
+		Component: Documentation,
+		slideProps: { className: styles.docs },
+		componentProps: {},
+	},
 	{
 		Component: Registration,
 		slideProps: { className: styles.reg },
@@ -84,18 +86,9 @@ const slides = [
 	},
 ];
 
-// function isInViewport(yourElement, offset = 0) {
-// 	if (!yourElement) return false;
-// 	const top = yourElement.getBoundingClientRect().top;
-// 	const result = top + offset >= 0 && top - offset <= window.innerHeight;
-// 	console.log('result', result);
-// 	return top + offset >= 0 && top - offset <= window.innerHeight;
-// }
-
 const Home = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const itemsRef = useRef([]);
-	const [scrollable, setScrollable] = useState(true);
 
 	const [eventScroll, setEventScroll] = useState(null);
 
@@ -112,7 +105,7 @@ const Home = () => {
 	};
 
 	const scrollSlide = (dir) => {
-		if (currentSlide === 1) return;
+		if (currentSlide === 11) return;
 		return dir === 'next' ? scrollToNextSection() : scrollToPreviousSection();
 	};
 
@@ -132,7 +125,7 @@ const Home = () => {
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			eventScroll.deltaY > 0 ? scrollSlide('next') : scrollSlide('prev');
-		}, 150);
+		}, 250);
 
 		return () => clearTimeout(timeout);
 	}, [eventScroll]);
@@ -153,7 +146,6 @@ const Home = () => {
 					<Slide key={index} {...slideProps} ref={(el) => (itemsRef.current[index] = el)}>
 						<Component
 							{...componentProps}
-							setScrollable={setScrollable}
 							scrollToNextSection={scrollToNextSection}
 							scrollToPreviousSection={scrollToPreviousSection}
 						/>

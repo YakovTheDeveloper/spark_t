@@ -64,7 +64,7 @@
 }
 
 
-.profit {
+/* .profit {
     background-image: url('../../assets/blur/blur-profit-2.png');
     background-repeat: no-repeat;
     background-position: left;
@@ -75,7 +75,7 @@
     background-image: url('../../assets/blur/blur-profit-2.png');
     background-repeat: no-repeat;
     background-position: left;
-}
+} */
 
 
 @media(max-width: 391px) {

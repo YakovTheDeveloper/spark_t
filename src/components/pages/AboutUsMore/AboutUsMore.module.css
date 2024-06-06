@@ -10,6 +10,13 @@
     flex-grow: 1;
 }
 
+.background {
+    background-image: url('../../../assets/blur/blur3-mask.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .text {
     padding-top: unset;
     margin-right: 10%;

@@ -4,3 +4,10 @@
     position: relative;
     overflow: hidden;
 }
+
+
+@media(max-width: 391px) {
+    .slide.keyFeatures {
+        height: auto;
+    }
+}
