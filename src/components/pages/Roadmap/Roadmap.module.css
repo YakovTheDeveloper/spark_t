@@ -1,0 +1,121 @@
+.container {
+    display: flex;
+    padding-top: 20vh;
+    height: 100%;
+    flex-direction: column;
+    position: relative;
+}
+
+.container h1 {
+    margin-left: 4%;
+}
+
+.container h2 {
+    font-size: 32px;
+    padding-bottom: 8px;
+    font-weight: 500;
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.content {
+    display: flex;
+    gap: 108px;
+    margin: auto 0;
+    position: relative;
+    padding-left: var(--padding-desktop-container-horizontal);
+    padding-right: var(--padding-desktop-container-horizontal);
+}
+
+.content:before {
+    content: '';
+    top: -15px;
+    left: 0;
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 0px 127.015px #FFFFFF, 0px 0px 72.5803px #FFFFFF, 0px 0px 42.3385px #FFFFFF, 0px 0px 21.1692px #FFFFFF, 0px 0px 6.04836px #FFFFFF, 0px 0px 3.02418px #FFFFFF;
+    z-index: -1;
+
+}
+
+.point {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 330px;
+    position: relative;
+}
+
+.point:before {
+    content: '';
+    top: -30px;
+    position: absolute;
+    height: 1px;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    background: #FFFFFF;
+    z-index: 2;
+}
+
+.point:first-child:before {
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 0px 127.015px #FFFFFF, 0px 0px 72.5803px #FFFFFF, 0px 0px 42.3385px #FFFFFF, 0px 0px 21.1692px #FFFFFF, 0px 0px 6.04836px #FFFFFF, 0px 0px 3.02418px #FFFFFF;
+}
+
+.point:nth-child(2):before {
+    content: '';
+    background: rgb(173, 173, 173);
+    border: 3px solid rgba(255, 255, 255, 0.52);
+    backdrop-filter: blur(32.4px);
+}
+
+@media(max-width: 391px) {
+    .content {
+        padding-left: var(--padding-mobile-container-horizontal);
+        padding-right: var(--padding-mobile-container-horizontal);
+        flex-direction: column;
+    }
+
+    .content:before {
+        display: none;
+    }
+
+    .container:before {
+        content: '';
+        top: 0;
+        right: 37px;
+        position: absolute;
+        height: 100vh;
+        width: 1;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0px 0px 127.015px #FFFFFF, 0px 0px 72.5803px #FFFFFF, 0px 0px 42.3385px #FFFFFF, 0px 0px 21.1692px #FFFFFF, 0px 0px 6.04836px #FFFFFF, 0px 0px 3.02418px #FFFFFF;
+        z-index: -1;
+    }
+
+    .point {
+        padding-right: 40px;
+        margin-right: 39px;
+        width: 100%;
+    }
+
+    .point:before {
+        width: 24px;
+        height: 24px;
+        top: 5px;
+        right: 0;
+    }
+
+    .container h2 {
+        font-size: 24px;
+        text-align: right;
+    }
+
+    .container p {
+        text-align: right;
+    }
+}

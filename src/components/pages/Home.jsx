@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styles from './Home.module.css';
 import Slide from '../ui/Slide/Slide';
 import AboutUsMore from './AboutUsMore/AboutUsMore';
@@ -14,8 +14,29 @@ import useOnScreen from '../../hooks/useOnScreen';
 import Profit from './Profit/Profit';
 import Header from '../header/Header';
 import Footer from './Footer/Footer';
+import Roadmap from './Roadmap/Roadmap';
+import { debounce } from '../../utils/debounce';
+import { useSwipeable } from 'react-swipeable';
 
-const slides = [
+export const slides = [
+	{
+		Component: AboutUsMore,
+		slideProps: {
+			id: 'AboutUsMore',
+			className: styles.aboutUsMore,
+		},
+		componentProps: {},
+	},
+	{
+		Component: AboutUsMore,
+		slideProps: {
+			id: 'AboutUsMoreDetailed',
+			className: styles.aboutUsMore,
+		},
+		componentProps: {
+			detailed: true,
+		},
+	},
 	{
 		Component: Welcome,
 		slideProps: { className: styles.welcome, id: 'Welcome' },
@@ -51,26 +72,31 @@ const slides = [
 		},
 		componentProps: {},
 	},
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {
+	// 		id: 'AboutUsMore',
+	// 	},
+	// 	componentProps: { selectedLink: 1 },
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {
+	// 		id: 'AboutUsMore',
+	// 	},
+	// 	componentProps: { selectedLink: 2 },
+	// },
+	// {
+	// 	Component: AboutUsMore,
+	// 	slideProps: {
+	// 		id: 'AboutUsMore',
+	// 	},
+	// 	componentProps: { selectedLink: 3 },
+	// },
 	{
-		Component: AboutUsMore,
-		slideProps: {
-			id: 'AboutUsMore',
-		},
-		componentProps: { selectedLink: 1 },
-	},
-	{
-		Component: AboutUsMore,
-		slideProps: {
-			id: 'AboutUsMore',
-		},
-		componentProps: { selectedLink: 2 },
-	},
-	{
-		Component: AboutUsMore,
-		slideProps: {
-			id: 'AboutUsMore',
-		},
-		componentProps: { selectedLink: 3 },
+		Component: Roadmap,
+		slideProps: { className: styles.roadmap, id: 'Roadmap' },
+		componentProps: {},
 	},
 	{
 		Component: AdminPanel,
@@ -87,11 +113,11 @@ const slides = [
 		slideProps: { className: styles.reg, id: 'Registration' },
 		componentProps: {},
 	},
-	{
-		Component: Achievements,
-		slideProps: { id: 'Achievements' },
-		componentProps: {},
-	},
+	// {
+	// 	Component: Achievements,
+	// 	slideProps: { id: 'Achievements' },
+	// 	componentProps: {},
+	// },
 	{
 		Component: Profit,
 		slideProps: { className: styles.profit, id: 'Profit' },
@@ -104,63 +130,107 @@ const slides = [
 	},
 ];
 
+const achievementsIndex = () => slides.findIndex((s) => s.slideProps.id === 'Achievements');
+const aboutUsMoreIndex = () => slides.findIndex((s) => s.slideProps.id === 'AboutUsMoreDetailed');
+
 const Home = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const itemsRef = useRef([]);
 
-	const [eventScroll, setEventScroll] = useState(null);
-
-	const scrollToNextSection = () => {
+	const scrollToNextSection = useCallback(() => {
 		setCurrentSlide((prev) => {
 			return prev < itemsRef.current.length - 1 ? prev + 1 : prev;
 		});
-	};
+	});
 
-	const scrollToPreviousSection = () => {
+	const scrollToPreviousSection = useCallback(() => {
 		setCurrentSlide((prev) => {
 			return prev > 0 ? prev - 1 : prev;
 		});
-	};
+	});
 
-	const scrollSlide = (dir) => {
-		if (currentSlide === 11) return;
-		return dir === 'next' ? scrollToNextSection() : scrollToPreviousSection();
-	};
+	const scrollSlide = (dir) => (dir === 'next' ? scrollToNextSection() : scrollToPreviousSection());
 
 	useEffect(() => {
-		const handler = (event) => {
-			event.preventDefault();
-			setEventScroll(event);
-			return;
-		};
-		window.addEventListener('wheel', handler, { passive: false });
-
-		return () => {
-			window.removeEventListener('wheel', handler);
-		};
-	}, []);
-
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			eventScroll.deltaY > 0 ? scrollSlide('next') : scrollSlide('prev');
-		}, 250);
-
-		return () => clearTimeout(timeout);
-	}, [eventScroll]);
-
-	useEffect(() => {
-		console.log('currentSlide', currentSlide);
 		if (itemsRef.current.length > 0) {
 			const slide = itemsRef.current[currentSlide];
-			slide.scrollIntoView({ behavior: 'smooth' });
+			slide.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
 		}
 	}, [currentSlide]);
 
+	const handler = useCallback(
+		(event) => {
+			event.deltaY > 0 ? scrollSlide('next') : scrollSlide('prev');
+		},
+		[currentSlide],
+	);
+
+	const debouncedHandler = useRef(debounce(handler, 100)).current;
+
+	useEffect(() => {
+		const listener = (event) => {
+			event.preventDefault();
+			debouncedHandler(event);
+		};
+
+		if (currentSlide === achievementsIndex() || currentSlide === aboutUsMoreIndex()) {
+			return () => {
+				window.removeEventListener('wheel', listener);
+			};
+		}
+
+		window.addEventListener('wheel', listener, { passive: false });
+
+		return () => {
+			window.removeEventListener('wheel', listener);
+		};
+	}, [debouncedHandler, currentSlide, handler, scrollSlide]);
+
+	const Slides = useMemo(
+		() =>
+			slides.map(({ Component, componentProps, slideProps }, index) => (
+				<Slide
+					key={index}
+					{...slideProps}
+					ref={(el) => (itemsRef.current[index] = el)}
+					scrollToNextSection={scrollToNextSection}
+					scrollToPreviousSection={scrollToPreviousSection}
+				>
+					<Component
+						{...componentProps}
+						scrollToNextSection={scrollToNextSection}
+						scrollToPreviousSection={scrollToPreviousSection}
+					/>
+				</Slide>
+			)),
+		[],
+	);
+
+	const handleSwipedUp = () => {
+		scrollToNextSection();
+	};
+
+	const handleSwipedDown = () => {
+		scrollToPreviousSection();
+	};
+
+	// const swipeConfig = {
+	// 	onSwipedUp: handleSwipedUp,
+	// 	onSwipedDown: handleSwipedDown,
+	// 	touchEventOptions: { passive: false },
+	// 	preventScrollOnSwipe: true,
+	// 	trackTouch: true,
+	// 	delta: 1,
+	// };
+
+	// const swipeHandlers = useSwipeable(swipeConfig);
+
 	return (
 		<>
-			<Header currentSlide={slides[currentSlide]} />
+			<Header currentSlide={slides[currentSlide]} setCurrentSlide={setCurrentSlide} />
 			<main>
-				{slides.map(({ Component, componentProps, slideProps }, index) => (
+				{Slides}
+				{/* {slides.map(({ Component, componentProps, slideProps }, index) => (
 					<Slide key={index} {...slideProps} ref={(el) => (itemsRef.current[index] = el)}>
 						<Component
 							{...componentProps}
@@ -168,7 +238,7 @@ const Home = () => {
 							scrollToPreviousSection={scrollToPreviousSection}
 						/>
 					</Slide>
-				))}
+				))} */}
 			</main>
 		</>
 	);

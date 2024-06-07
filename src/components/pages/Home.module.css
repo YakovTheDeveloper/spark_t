@@ -70,6 +70,12 @@
     background-position: left; */
 }
 
+.roadmap {
+    background-image: url('../../assets/blur/blur-admin-panel.png');
+    background-repeat: no-repeat;
+    background-position: -20% -20%;
+}
+
 
 /* .profit {
     background-image: url('../../assets/blur/blur-profit-2.png');
@@ -93,8 +99,13 @@
     }
 
     .adminPanel {
-        background-position: 30% 0, 50% 90%;
-        background-size: auto, 592px 353px;
+        background-position: 0 0, 50% 90%;
+        background-size: auto, 450px 300px;
+
+    }
+
+    .roadmap {
+        background-position: center -15vh;
     }
 
 }

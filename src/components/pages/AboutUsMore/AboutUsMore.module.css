@@ -1,7 +1,7 @@
 .container {
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
-    padding-top: 180px;
+    padding-top: 20vh;
     display: flex;
     justify-content: space-between;
     flex-direction: column;

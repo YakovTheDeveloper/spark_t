@@ -4,18 +4,25 @@ import Button from '../ui/Button/Button';
 import { useContext, useState } from 'react';
 import Logo from '../ui/Logo/Logo';
 import { useDataStore } from '../../../store';
+import classNames from 'classnames';
+import { slides } from '../pages/Home';
 
-const MenuList = ({ className }) => {
+const MenuList = ({ className, setCurrentSlide, isMobile, close }) => {
+	const slideIndex = (id) => {
+		isMobile && close?.();
+		return slides.findIndex((s) => s.slideProps.id === id);
+	};
+
 	return (
 		<ul className={className}>
 			<li>
-				<a to='/'>About</a>
+				<button onClick={() => setCurrentSlide(slideIndex('AboutUs'))}>About</button>
 			</li>
 			<li>
-				<a to='/a'>Admin panel</a>
+				<button onClick={() => setCurrentSlide(slideIndex('AdminPanel'))}>Admin panel</button>
 			</li>
 			<li>
-				<a to='/b'>HOW TO CONNECT</a>
+				<button onClick={() => setCurrentSlide(slideIndex('Registration'))}>HOW TO CONNECT</button>
 			</li>
 			{/* <div className={styles.logo}>
             <Logo />
@@ -24,14 +31,15 @@ const MenuList = ({ className }) => {
 	);
 };
 
-const Header = ({ currentSlide }) => {
+const Header = ({ currentSlide, setCurrentSlide }) => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const step = useDataStore((s) => s.step);
-	//12
-	const contrastLogo = currentSlide.slideProps.id === 'Profit' && step > 0;
+	const current = currentSlide.slideProps.id;
+	const contrastLogo = current === 'Profit' && step > 0;
+	const isLastSlide = current === 'Footer';
 
 	return (
-		<header className={styles.container}>
+		<header className={classNames(styles.container, isLastSlide && 'hide')}>
 			{currentSlide.slideProps.id !== 'Welcome' && (
 				<div className={styles.logoSmall}>
 					<Logo contrast={contrastLogo} />
@@ -47,7 +55,12 @@ const Header = ({ currentSlide }) => {
 							}}
 						/>
 					</button>
-					<MenuList className={styles.menuListMobile} />
+					<MenuList
+						close={() => setIsMobileMenuOpen(false)}
+						isMobile={true}
+						className={styles.menuListMobile}
+						setCurrentSlide={setCurrentSlide}
+					/>
 				</div>
 			)}
 			<button onClick={() => setIsMobileMenuOpen((prev) => !prev)} className={styles.mobileMenuButton}>
@@ -58,7 +71,7 @@ const Header = ({ currentSlide }) => {
 					}}
 				/>
 			</button>
-			<MenuList className={styles.list} />
+			<MenuList className={styles.list} setCurrentSlide={setCurrentSlide} />
 			<button className={styles.regButton}>Registration</button>
 		</header>
 	);

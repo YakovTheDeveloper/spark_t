@@ -3,6 +3,7 @@ import styles from './KeyFeatures.module.css';
 import Lines from '../../../assets/blur/radial_lines.png';
 import classNames from 'classnames';
 import useOnScreen from '../../../hooks/useOnScreen';
+import { useSwipeable } from 'react-swipeable';
 const data = [
 	{
 		title: 'Open Mempool for Searcher',

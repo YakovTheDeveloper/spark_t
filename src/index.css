@@ -82,7 +82,7 @@ button {
     background: unset;
     border: none;
     color: rgba(255, 255, 255, 1);
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 ul {
@@ -106,6 +106,12 @@ p {
     font-weight: 500;
     line-height: 29px;
     font-size: 24px;
+}
+
+.hide {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
 }
 
 

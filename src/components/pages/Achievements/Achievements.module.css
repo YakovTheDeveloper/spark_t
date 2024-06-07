@@ -16,14 +16,14 @@
 .container h1 {
     width: 100%;
     position: absolute;
-    top: 30%;
+    top: 15%;
     left: 0;
     text-align: center;
 }
 
 .items {
     height: 574px;
-    padding-top: 12%;
+    padding-top: 5vh;
     padding-right: var(--padding-desktop-container-horizontal);
     display: flex;
     align-items: center;
@@ -96,6 +96,10 @@
 
     .container h1 {
         top: 20%;
+    }
+
+    .items {
+        padding-top: 20vh;
     }
 
     .item {

@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Achievements.module.css';
 import Blur from '../../../assets/blur/blur-achievements.png';
 import useOnScreen from '../../../hooks/useOnScreen';
 import classNames from 'classnames';
+import { debounce } from '../../../utils/debounce';
 
 const items = [
 	{
@@ -49,13 +50,10 @@ function useFirstRender() {
 const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 	const achievementItemsRef = useRef(null);
 	const [currentItem, setCurrentItem] = useState(0);
-	const [eventScroll, setEventScroll] = useState(null);
+	// const [eventScroll, setEventScroll] = useState(null);
 	const ref = useRef();
 	const titleRef = useRef();
 	const firstRender = useFirstRender();
-	// const shouldScrollNext = (curr) => curr < achievementItemsRef.current?.children?.length - 1;
-	// const shouldScrollPrev = (curr) => curr > 0;
-
 	const scrollToNextAchievement = () => {
 		setCurrentItem((prev) => (prev < achievementItemsRef.current?.children?.length - 1 ? prev + 1 : prev));
 	};
@@ -69,62 +67,51 @@ const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 	};
 
 	useEffect(() => {
-		const isFirstElement = currentItem === 0;
-		const isLastElement = currentItem === achievementItemsRef.current?.children.length - 1;
+		if (firstRender) return;
+		if (achievementItemsRef.current?.children.length > 0) {
+			const slide = achievementItemsRef.current?.children[currentItem];
+			slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+		}
+	}, [currentItem]);
 
-		const handler = (event) => {
-			event.preventDefault();
-
+	const handler = useCallback(
+		(event, currentItem) => {
 			const parent = ref.current;
 			const child = event.srcElement;
 			const isCurrentSlideScroll = parent.contains(child);
 			if (!isCurrentSlideScroll) return;
 
-			const forwardScroll = event.deltaY > 0;
-			const backScroll = event.deltaY < 0;
-
-			if (isLastElement && forwardScroll) {
-				scrollToNextSection();
-				return;
-			}
-			if (isFirstElement && backScroll) {
+			const isLastElement = achievementItemsRef.current?.children.length - 1 === currentItem;
+			const downScroll = event.deltaY > 0;
+			const upScroll = event.deltaY < 0;
+			if (upScroll && currentItem === 0) {
 				scrollToPreviousSection();
 				return;
 			}
+			if (downScroll && isLastElement) {
+				scrollToNextSection();
+				return;
+			}
 
-			setEventScroll(event);
+			event.deltaY > 0 ? scrollItems('next') : scrollItems('prev');
+		},
+		[currentItem],
+	);
+
+	const debouncedHandler = useRef(debounce(handler, 250)).current;
+
+	useEffect(() => {
+		const listener = (event) => {
+			event.preventDefault();
+			debouncedHandler(event, currentItem);
 		};
 
-		window.addEventListener('wheel', handler, { passive: false });
+		window.addEventListener('wheel', listener, { passive: false });
 
 		return () => {
-			window.removeEventListener('wheel', handler);
+			window.removeEventListener('wheel', listener);
 		};
-	}, [currentItem]);
-
-	useEffect(() => {
-		console.log('firstRender', firstRender);
-
-		const timeout = setTimeout(() => {
-			eventScroll.deltaY > 0 ? scrollItems('next') : scrollItems('prev');
-		}, 200);
-
-		return () => clearTimeout(timeout);
-	}, [eventScroll, firstRender]);
-
-	useEffect(() => {
-		if (firstRender) {
-			return;
-		}
-
-		const timeout = setTimeout(() => {
-			if (achievementItemsRef.current?.children.length > 0) {
-				const slide = achievementItemsRef.current?.children[currentItem];
-				slide?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-			}
-		}, 150);
-		return () => clearTimeout(timeout);
-	}, [currentItem]);
+	}, [debouncedHandler, currentItem, handler]);
 
 	const opacity = (index) => {
 		if (index === currentItem) {

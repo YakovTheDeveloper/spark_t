@@ -14,7 +14,7 @@
 
 @media(max-width: 391px) {
     .container {
-        top: 24%;
+        top: 20%;
         padding-left: var(--padding-mobile-container-horizontal);
         padding-right: var(--padding-mobile-container-horizontal);
         gap: 15px;

@@ -121,6 +121,14 @@
         padding-left: var(--padding-mobile-container-horizontal);
         padding-right: var(--padding-mobile-container-horizontal);
         gap: 24px;
+        background-position: center;
+    }
+
+    .container-step-3 {
+        background-image: url('../../../assets/blur/blur-profit.png');
+        background-position: center top;
+        background-size: cover;
+
     }
 
     .content {

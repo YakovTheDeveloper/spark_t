@@ -4,6 +4,7 @@ import Lines from '../../../assets/blur/radial_lines.png';
 import AzimutVideo from '../../../assets/video/azimut.mp4';
 
 const OurVision = () => {
+	console.log('VISION');
 	return (
 		<div className={styles.container}>
 			<div className={styles.inner}>
@@ -22,4 +23,4 @@ const OurVision = () => {
 	);
 };
 
-export default OurVision;
+export default React.memo(OurVision);

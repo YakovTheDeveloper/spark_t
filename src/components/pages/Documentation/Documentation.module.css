@@ -33,7 +33,7 @@
 @media(max-width: 391px) {
 
     .container {
-        margin-top: 35%;
+        margin-top: 22vh;
         padding-left: var(--padding-mobile-container-horizontal);
         padding-right: var(--padding-mobile-container-horizontal);
         gap: 20px;
