@@ -4,6 +4,8 @@ import Blur from '../../../assets/blur/blur-achievements.png';
 import useOnScreen from '../../../hooks/useOnScreen';
 import classNames from 'classnames';
 import { debounce } from '../../../utils/debounce';
+import { useSwipeable } from 'react-swipeable';
+import { assignRefs } from '../../../utils/assignRefs';
 
 const items = [
 	{
@@ -76,10 +78,10 @@ const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 
 	const handler = useCallback(
 		(event, currentItem) => {
-			const parent = ref.current;
-			const child = event.srcElement;
-			const isCurrentSlideScroll = parent.contains(child);
-			if (!isCurrentSlideScroll) return;
+			// const parent = ref.current;
+			// const child = event.srcElement;
+			// const isCurrentSlideScroll = parent.contains(child);
+			// if (!isCurrentSlideScroll) return;
 
 			const isLastElement = achievementItemsRef.current?.children.length - 1 === currentItem;
 			const downScroll = event.deltaY > 0;
@@ -106,12 +108,41 @@ const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 			debouncedHandler(event, currentItem);
 		};
 
-		window.addEventListener('wheel', listener, { passive: false });
+		ref.current?.addEventListener('wheel', listener, { passive: false });
 
 		return () => {
-			window.removeEventListener('wheel', listener);
+			ref.current?.removeEventListener('wheel', listener);
 		};
 	}, [debouncedHandler, currentItem, handler]);
+
+	const swipeHandler = (direction) => {
+		if (direction === 'right' && currentItem === 0) {
+			scrollToPreviousSection();
+			return;
+		}
+		if (downScroll && isLastElement) {
+			scrollToNextSection();
+			return;
+		}
+	};
+
+	const onSwipedRight = () => {
+		scrollToPreviousAchievement();
+	};
+	const onSwipedLeft = () => {
+		scrollToNextAchievement();
+	};
+
+	const swipeConfig = {
+		onSwipedRight,
+		onSwipedLeft,
+		touchEventOptions: { passive: false },
+		preventScrollOnSwipe: true,
+		trackTouch: true,
+		delta: 1,
+	};
+
+	const swipeHandlers = useSwipeable(swipeConfig);
 
 	const opacity = (index) => {
 		if (index === currentItem) {
@@ -124,7 +155,7 @@ const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 	};
 
 	return (
-		<div className={styles.container} ref={ref}>
+		<div className={styles.container} ref={assignRefs(ref, swipeHandlers.ref)}>
 			<h1 ref={titleRef}>Statistics and Achievements</h1>
 			<div className={styles.items} ref={achievementItemsRef}>
 				{items.map((item, index) => (

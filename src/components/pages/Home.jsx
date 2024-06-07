@@ -20,24 +20,6 @@ import { useSwipeable } from 'react-swipeable';
 
 export const slides = [
 	{
-		Component: AboutUsMore,
-		slideProps: {
-			id: 'AboutUsMore',
-			className: styles.aboutUsMore,
-		},
-		componentProps: {},
-	},
-	{
-		Component: AboutUsMore,
-		slideProps: {
-			id: 'AboutUsMoreDetailed',
-			className: styles.aboutUsMore,
-		},
-		componentProps: {
-			detailed: true,
-		},
-	},
-	{
 		Component: Welcome,
 		slideProps: { className: styles.welcome, id: 'Welcome' },
 		componentProps: {},
@@ -72,27 +54,16 @@ export const slides = [
 		},
 		componentProps: {},
 	},
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {
-	// 		id: 'AboutUsMore',
-	// 	},
-	// 	componentProps: { selectedLink: 1 },
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {
-	// 		id: 'AboutUsMore',
-	// 	},
-	// 	componentProps: { selectedLink: 2 },
-	// },
-	// {
-	// 	Component: AboutUsMore,
-	// 	slideProps: {
-	// 		id: 'AboutUsMore',
-	// 	},
-	// 	componentProps: { selectedLink: 3 },
-	// },
+	{
+		Component: AboutUsMore,
+		slideProps: {
+			id: 'AboutUsMoreDetailed',
+			className: styles.aboutUsMore,
+		},
+		componentProps: {
+			detailed: true,
+		},
+	},
 	{
 		Component: Roadmap,
 		slideProps: { className: styles.roadmap, id: 'Roadmap' },
@@ -113,11 +84,11 @@ export const slides = [
 		slideProps: { className: styles.reg, id: 'Registration' },
 		componentProps: {},
 	},
-	// {
-	// 	Component: Achievements,
-	// 	slideProps: { id: 'Achievements' },
-	// 	componentProps: {},
-	// },
+	{
+		Component: Achievements,
+		slideProps: { id: 'Achievements' },
+		componentProps: {},
+	},
 	{
 		Component: Profit,
 		slideProps: { className: styles.profit, id: 'Profit' },

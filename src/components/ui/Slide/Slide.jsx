@@ -34,6 +34,7 @@ const Slide = (props, ref) => {
 			ref={(el) => {
 				ref(el);
 				if (id === 'KeyFeatures') return;
+				if (id === 'AboutUsMoreDetailed') return;
 				swipeHandlers.ref(el);
 			}}
 			className={classNames(styles.slide, id && styles[id], className)}

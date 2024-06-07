@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './AboutUsMore.module.css';
 import Video from '../../../assets/video/aboutUs.mp4';
 import classNames from 'classnames';
+import { useSwipeable } from 'react-swipeable';
+import { assignRefs } from '../../../utils/assignRefs';
 
 const text = {
 	0: `After you update the validator software (just like connecting Jito), our MEV 
@@ -25,13 +27,13 @@ const AboutUsMore = ({ detailed, scrollToNextSection, scrollToPreviousSection })
 
 	const nextStep = useCallback(() => {
 		setStep((prev) => {
-			return prev + 1;
+			return prev < 2 ? prev + 1 : prev;
 		});
 	});
 
 	const prevStep = useCallback(() => {
 		setStep((prev) => {
-			return prev - 1;
+			return prev > 0 ? prev - 1 : prev;
 		});
 	});
 
@@ -53,6 +55,21 @@ const AboutUsMore = ({ detailed, scrollToNextSection, scrollToPreviousSection })
 		scrollDown ? nextStep() : prevStep();
 	};
 
+	const swipeHandler = (direction) => {
+		if (!detailed) return;
+
+		if (step === 0 && direction === 'down') {
+			scrollToPreviousSection();
+			return;
+		}
+
+		if (step === 2 && direction === 'up') {
+			scrollToNextSection();
+			return;
+		}
+		direction === 'up' ? nextStep() : prevStep();
+	};
+
 	useEffect(() => {
 		if (videoRef.current) videoRef.current.currentTime = 0;
 
@@ -66,9 +83,26 @@ const AboutUsMore = ({ detailed, scrollToNextSection, scrollToPreviousSection })
 		return () => ref.current?.removeEventListener('wheel', handler);
 	}, [step]);
 
+	const onSwipedUp = () => swipeHandler('up');
+	const onSwipedDown = () => swipeHandler('down');
+
+	const swipeConfig = {
+		onSwipedUp,
+		onSwipedDown,
+		touchEventOptions: { passive: false },
+		preventScrollOnSwipe: true,
+		trackTouch: true,
+		delta: 1,
+	};
+
+	const swipeHandlers = useSwipeable(swipeConfig);
+
 	return (
 		<>
-			<div className={classNames(styles.container, !detailed && styles.background)} ref={ref}>
+			<div
+				className={classNames(styles.container, !detailed && styles.background)}
+				ref={assignRefs(ref, swipeHandlers.ref)}
+			>
 				{detailed && <p className={styles.info}>{text[step]}</p>}
 				<div className={styles.links}>
 					<p className={styles.about}>about us</p>

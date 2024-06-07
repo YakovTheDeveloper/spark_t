@@ -7,22 +7,42 @@ import { useDataStore } from '../../../store';
 import classNames from 'classnames';
 import { slides } from '../pages/Home';
 
-const MenuList = ({ className, setCurrentSlide, isMobile, close }) => {
-	const slideIndex = (id) => {
-		isMobile && close?.();
-		return slides.findIndex((s) => s.slideProps.id === id);
-	};
+const slideIndex = (id) => {
+	return slides.findIndex((s) => s.slideProps.id === id);
+};
 
+const MenuList = ({ className, setCurrentSlide, isMobile, close }) => {
 	return (
 		<ul className={className}>
 			<li>
-				<button onClick={() => setCurrentSlide(slideIndex('AboutUs'))}>About</button>
+				<button
+					onClick={() => {
+						setCurrentSlide(slideIndex('AboutUs'));
+						isMobile && close?.();
+					}}
+				>
+					About
+				</button>
 			</li>
 			<li>
-				<button onClick={() => setCurrentSlide(slideIndex('AdminPanel'))}>Admin panel</button>
+				<button
+					onClick={() => {
+						setCurrentSlide(slideIndex('AdminPanel'));
+						isMobile && close?.();
+					}}
+				>
+					Admin panel
+				</button>
 			</li>
 			<li>
-				<button onClick={() => setCurrentSlide(slideIndex('Registration'))}>HOW TO CONNECT</button>
+				<button
+					onClick={() => {
+						setCurrentSlide(slideIndex('Registration'));
+						isMobile && close?.();
+					}}
+				>
+					HOW TO CONNECT
+				</button>
 			</li>
 			{/* <div className={styles.logo}>
             <Logo />
@@ -72,7 +92,9 @@ const Header = ({ currentSlide, setCurrentSlide }) => {
 				/>
 			</button>
 			<MenuList className={styles.list} setCurrentSlide={setCurrentSlide} />
-			<button className={styles.regButton}>Registration</button>
+			<button className={styles.regButton} onClick={() => setCurrentSlide(slideIndex('Registration'))}>
+				Registration
+			</button>
 		</header>
 	);
 };
