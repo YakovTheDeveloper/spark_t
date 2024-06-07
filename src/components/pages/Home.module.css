@@ -41,6 +41,13 @@
 
 }
 
+.aboutUsMore {
+    /* background-image: url('../../assets/blur/blur-mask-group-about-us.png'); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 
 
 .adminPanel {

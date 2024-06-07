@@ -3,6 +3,7 @@ import MenuIcon from '../../assets/icons/menu-mobile-icon.svg?react';
 import Button from '../ui/Button/Button';
 import { useContext, useState } from 'react';
 import Logo from '../ui/Logo/Logo';
+import { useDataStore } from '../../../store';
 
 const MenuList = ({ className }) => {
 	return (
@@ -25,13 +26,13 @@ const MenuList = ({ className }) => {
 
 const Header = ({ currentSlide }) => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+	const step = useDataStore((s) => s.step);
 	//12
-	const contrastLogo = currentSlide === 0 && document.body.classList.contains('end');
+	const contrastLogo = currentSlide.slideProps.id === 'Profit' && step > 0;
 
 	return (
 		<header className={styles.container}>
-			{currentSlide > 0 && (
+			{currentSlide.slideProps.id !== 'Welcome' && (
 				<div className={styles.logoSmall}>
 					<Logo contrast={contrastLogo} />
 				</div>

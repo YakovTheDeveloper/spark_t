@@ -1,11 +1,18 @@
 .container {
     display: flex;
     align-items: center;
+    transition: all 0.5s;
     gap: 10px;
+    color: #fff;
 }
 
 .container p {
     font-weight: 500;
     font-size: 24px;
     white-space: nowrap;
+}
+
+.logo-small {
+    width: 37px;
+    height: 37px;
 }

@@ -5,12 +5,15 @@ import Input from '../../ui/Input/Input';
 import Spoiler from '../../../assets/spoiler.svg?react';
 import classNames from 'classnames';
 import Button from '../../ui/Button/Button';
+import { useDataStore } from '../../../../store';
 
 const Profit = () => {
 	const [stake, setStake] = useState('');
-	const [step, setStep] = useState(0);
-	const [isEnd, setIsEnd] = useState(false);
+	const step = useDataStore((s) => s.step);
+	const setStep = useDataStore((s) => s.setStep);
 	const isFinalStep = step === 2;
+
+	const [isEnd, setIsEnd] = useState(false);
 
 	useEffect(() => {
 		if (!stake || isEnd) return;
@@ -31,7 +34,7 @@ const Profit = () => {
 		if (step !== 1) return;
 		setTimeout(() => {
 			setStep(2);
-		}, 1000);
+		}, 1500);
 	}, [step]);
 
 	return (

@@ -6,6 +6,8 @@ import useOnScreen from '../../../hooks/useOnScreen';
 const Slide = (props, ref) => {
 	const { children, className = null, id = '' } = props;
 
+	console.log('id', id);
+
 	return (
 		<section ref={ref} className={classNames(styles.slide, id && styles[id], className)}>
 			{children}
@@ -13,4 +15,6 @@ const Slide = (props, ref) => {
 	);
 };
 
-export default forwardRef(Slide);
+const Forwarded = forwardRef(Slide);
+
+export default React.memo(Forwarded);

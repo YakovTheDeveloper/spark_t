@@ -1,5 +1,5 @@
 .container {
-    transition: all 0.5s;
+    transition: all 1s;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -12,24 +12,18 @@
     /* transition: background-color 0.5s, background-image 0.5s; */
 
     background-color: rgba(0, 0, 255, 0.02);
-    background-image: url('../../../assets/blur/blur-profit-2.png');
+    background-image: url('../../../assets/blur/blur-profit-0.png');
     background-repeat: no-repeat;
     background-position: left;
 
 }
 
 .container-step-2 {
-    background-color: rgba(0, 0, 255, 0.25);
-    /* background-image: url('../../assets/blur/blur-profit-2.png'); */
-    background-repeat: no-repeat;
-    background-position: left;
+    background-image: url('../../../assets/blur/blur-profit.png');
 }
 
 .container-step-3 {
-    background-color: rgba(29, 83, 137, 0.722);
-    /* background-image: url('../../assets/blur/blur-profit-2.png'); */
-    background-repeat: no-repeat;
-    background-position: left;
+    background-image: url('../../../assets/blur/blur-profit-2.png');
 }
 
 .container-step-2 .result .opacityText, .container-step-3 .result .opacityText {

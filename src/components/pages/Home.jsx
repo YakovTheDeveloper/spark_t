@@ -13,22 +13,25 @@ import Achievements from './Achievements/Achievements';
 import useOnScreen from '../../hooks/useOnScreen';
 import Profit from './Profit/Profit';
 import Header from '../header/Header';
+import Footer from './Footer/Footer';
 
 const slides = [
 	{
 		Component: Welcome,
-		slideProps: { className: styles.welcome },
+		slideProps: { className: styles.welcome, id: 'Welcome' },
 		componentProps: {},
 	},
 	{
 		Component: OurVision,
-		slideProps: {},
+		slideProps: {
+			id: 'OurVision',
+		},
 		componentProps: {},
 	},
 	{
 		Component: KeyFeatures,
 		slideProps: {
-			id: 'keyFeatures',
+			id: 'KeyFeatures',
 		},
 		componentProps: {},
 	},
@@ -36,52 +39,67 @@ const slides = [
 		Component: AboutUs,
 		slideProps: {
 			className: styles.aboutUs,
+			id: 'AboutUs',
 		},
 		componentProps: {},
 	},
 	{
 		Component: AboutUsMore,
-		slideProps: {},
+		slideProps: {
+			id: 'AboutUsMore',
+			className: styles.aboutUsMore,
+		},
 		componentProps: {},
 	},
 	{
 		Component: AboutUsMore,
-		slideProps: {},
+		slideProps: {
+			id: 'AboutUsMore',
+		},
 		componentProps: { selectedLink: 1 },
 	},
 	{
 		Component: AboutUsMore,
-		slideProps: {},
+		slideProps: {
+			id: 'AboutUsMore',
+		},
 		componentProps: { selectedLink: 2 },
 	},
 	{
 		Component: AboutUsMore,
-		slideProps: {},
+		slideProps: {
+			id: 'AboutUsMore',
+		},
 		componentProps: { selectedLink: 3 },
 	},
 	{
 		Component: AdminPanel,
-		slideProps: { className: styles.adminPanel },
+		slideProps: { className: styles.adminPanel, id: 'AdminPanel' },
 		componentProps: {},
 	},
 	{
 		Component: Documentation,
-		slideProps: { className: styles.docs },
+		slideProps: { className: styles.docs, id: 'Documentation' },
 		componentProps: {},
 	},
 	{
 		Component: Registration,
-		slideProps: { className: styles.reg },
+		slideProps: { className: styles.reg, id: 'Registration' },
 		componentProps: {},
 	},
 	{
 		Component: Achievements,
-		slideProps: {},
+		slideProps: { id: 'Achievements' },
 		componentProps: {},
 	},
 	{
 		Component: Profit,
-		slideProps: { className: styles.profit },
+		slideProps: { className: styles.profit, id: 'Profit' },
+		componentProps: {},
+	},
+	{
+		Component: Footer,
+		slideProps: { id: 'Footer' },
 		componentProps: {},
 	},
 ];
@@ -140,7 +158,7 @@ const Home = () => {
 
 	return (
 		<>
-			<Header currentSlide={currentSlide} />
+			<Header currentSlide={slides[currentSlide]} />
 			<main>
 				{slides.map(({ Component, componentProps, slideProps }, index) => (
 					<Slide key={index} {...slideProps} ref={(el) => (itemsRef.current[index] = el)}>

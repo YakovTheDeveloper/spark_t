@@ -12,9 +12,13 @@
 
 .background {
     background-image: url('../../../assets/blur/blur3-mask.png');
+    /* background-image: url('../../../assets/blur/blur-mask-group-about-us.png'); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    mix-blend-mode: color-burn;
+    background-blend-mode: color-burn;
+
 }
 
 .text {

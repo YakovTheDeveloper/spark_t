@@ -6,8 +6,13 @@
 }
 
 
+.slide.Footer {
+    height: auto;
+}
+
 @media(max-width: 391px) {
-    .slide.keyFeatures {
+    .slide.KeyFeatures {
         height: auto;
     }
+
 }
