@@ -16,6 +16,11 @@
     gap: 38px;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
+}
+
+.inner.mobile {
+    display: none;
 }
 
 .brand {
@@ -24,6 +29,8 @@
 
 .brandContainer {
     position: relative;
+    flex-grow: 1;
+    max-width: 330px;
 }
 
 .info {
@@ -50,7 +57,7 @@
 .bottom {
     width: 100%;
     display: flex;
-    padding: 0 19%;
+    padding: 0 7%;
     /* margin-bottom: 10%; */
 }
 
@@ -68,15 +75,31 @@
     z-index: -1;
 }
 
-@media(max-width: 391px) {
+.brandContainerMobile {
+    display: none;
+}
+
+/* .brandContainerDesktop {
+    display: flex;
+} */
+
+@media(max-width: 600px) {
     .inner {
-        flex-direction: column;
-        gap: 5px;
+        display: none;
     }
 
-    .inner img {
-        width: 80px;
-        height: 80px;
+    .inner.mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+
+    .brandContainer {
+        display: flex;
+        flex-grow: 0;
+        align-items: center;
+        gap: 17px;
     }
 
     .logoContainer {

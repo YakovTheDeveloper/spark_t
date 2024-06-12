@@ -23,23 +23,28 @@ ensuring the most efficient and fair operations
 		title: 'MEV Revenue Burning',
 		content: `
         Validators have the opportunity to burn MEV revenue to boost their base APY, 
-        enhancing their overall returns.
+        enhancing their overall returns
             `,
 	},
 	{
 		title: 'Optional Front-Running Inclusion',
 		content: `
         Validators are flexible, as by connecting to our system it is possible to enable or 
-        disable the front
-        -running option based on preferences
+        disable the front-running option based on preferences
             `,
 	},
 ];
 
+const options = {
+	root: null,
+	rootMargin: '0px',
+	threshold: 0.8,
+};
+
 const KeyFeatures = () => {
 	const [wasAnimated, setWasAnimated] = useState(false);
 	const ref = useRef();
-	const onScreen = useOnScreen(ref);
+	const onScreen = useOnScreen(ref, options);
 
 	useEffect(() => {
 		if (onScreen) setWasAnimated(onScreen);
@@ -48,8 +53,8 @@ const KeyFeatures = () => {
 	// return <></>;
 
 	return (
-		<div className={styles.container}>
-			<h1 ref={ref}>Key Features</h1>
+		<div className={styles.container} ref={ref}>
+			<h1>Key Features</h1>
 			<div className={styles.features}>
 				{data.map(({ content, title }, i) => (
 					<div className={classNames(styles.box, wasAnimated && styles[`box-${i + 1}`])}>

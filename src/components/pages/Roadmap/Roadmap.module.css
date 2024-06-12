@@ -13,6 +13,7 @@
 .container h2 {
     font-size: 32px;
     padding-bottom: 8px;
+    padding-top: 18px;
     font-weight: 500;
 }
 
@@ -74,7 +75,7 @@
     backdrop-filter: blur(32.4px);
 }
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
     .content {
         padding-left: var(--padding-mobile-container-horizontal);
         padding-right: var(--padding-mobile-container-horizontal);
@@ -113,6 +114,7 @@
     .container h2 {
         font-size: 24px;
         text-align: right;
+        padding-top: 4px;
     }
 
     .container p {

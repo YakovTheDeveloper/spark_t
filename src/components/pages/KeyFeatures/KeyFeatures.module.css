@@ -174,7 +174,7 @@
 
 
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
     .container {
         gap: 20px;
         padding-top: 30%;

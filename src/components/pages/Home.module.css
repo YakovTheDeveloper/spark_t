@@ -1,29 +1,45 @@
 .welcome {
-    background-image: url('../../assets/blur/blur1.png'), url('../../assets/blur/blur2.png');
+    background-image:
+        url('../../assets/blur/blur1.png'),
+        url('../../assets/blur/blur2.png');
     background-repeat: no-repeat, no-repeat;
     background-position: top right, bottom left;
     background-size: auto, 55%;
 }
 
+.welcome:after {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    content: '';
+    background-image: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(7, 8, 32, 0.3) 50%,
+            rgba(7, 8, 32, 1) 100%);
+}
 
-.aboutUs {
-    /* background-image: url('../../assets/blur/blur3.png');
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: 100%; */
 
-    /* Group 14 */
+.aboutUsMore {}
+
+.aboutUsMore:after {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 200px;
+    content: '';
+    background-image: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(7, 8, 32, 0.1) 25%,
+            rgba(7, 8, 32, 0.8) 80%,
+            rgba(7, 8, 32, 1) 100%);
+}
 
 
-    /* Group 17 */
-    /* mix-blend-mode: color-burn; */
-
-    /* background-image: url('../../assets/blur/blur3-mask.png'), url('../../assets/blur/blur-mask-about-us2.png');
-    background-repeat: no-repeat, no-repeat;
-    background-position: top right, top right;
-    background-size: auto, 100%;
-    background-blend-mode: color-burn; */
-
+.OurVision {
+    /* background: rgba(6, 6, 46, 0.5); */
+    /* background: #04092134; */
+    /* background: rgba(4, 9, 33, 1); */
 }
 
 .aboutUs:before {
@@ -42,6 +58,9 @@
 }
 
 .aboutUsMore {
+    display: flex;
+    min-height: 900px !important;
+    height: auto !important;
     /* background-image: url('../../assets/blur/blur-mask-group-about-us.png'); */
     background-repeat: no-repeat;
     background-position: center;
@@ -53,7 +72,7 @@
 .adminPanel {
     background-image: url('../../assets/blur/blur-admin-panel.png'), url('../../assets/admin-panel.png');
     background-repeat: no-repeat, no-repeat;
-    background-position: top left, right;
+    background-position: 0% 50%, right;
     background-size: auto, auto;
 }
 
@@ -62,6 +81,24 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+.docs:before {
+    position: absolute;
+    top: -15px;
+    width: 100%;
+    height: 200px;
+    content: '';
+    background-image: var(--gradient-slide-top);
+}
+
+.docs:after {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    content: '';
+    background-image: var(--gradient-slide-bottom);
 }
 
 .reg {
@@ -73,9 +110,31 @@
 .roadmap {
     background-image: url('../../assets/blur/blur-admin-panel.png');
     background-repeat: no-repeat;
-    background-position: -20% -20%;
+    background-position: -10% -10%;
 }
 
+.profit {
+    min-height: 100vh !important;
+    height: auto !important;
+}
+
+.profit:before {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 200px;
+    content: '';
+    background-image: var(--gradient-slide-top);
+}
+
+.profit:after {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    content: '';
+    background-image: var(--gradient-slide-bottom);
+}
 
 /* .profit {
     background-image: url('../../assets/blur/blur-profit-2.png');
@@ -91,15 +150,15 @@
 } */
 
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
     .welcome {
         background-image: url('../../assets/blur/blur1-mobile.png'), url('../../assets/blur/blur2.png');
         background-size: auto, auto;
-        background-position: top right, 80% -200%;
+        background-position: top right, 100% 100%;
     }
 
     .adminPanel {
-        background-position: 0 0, 50% 90%;
+        background-position: -200px 0, 50% 90%;
         background-size: auto, 450px 300px;
 
     }

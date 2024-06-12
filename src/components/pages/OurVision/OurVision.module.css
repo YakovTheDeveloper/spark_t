@@ -3,14 +3,12 @@
     position: relative;
     height: 445px;
     overflow: hidden;
-    mix-blend-mode: color-burn;
-    background: rgba(6, 6, 46, 0.4);
-    mix-blend-mode: difference;
+
 }
 
 .inner {
     padding-top: 100px;
-    max-width: 90%;
+    max-width: 95%;
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
     display: flex;
@@ -19,12 +17,11 @@
 
 
 .text {
-    margin-top: 30px;
     padding-top: unset;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.7);
     line-height: 43px;
-    font-size: 36px;
+    font-size: 32px;
     width: 600px;
 
 }
@@ -35,23 +32,30 @@
 
 .videoContainer {
     position: absolute;
-    top: -40%;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
-    filter: sepia(50%) hue-rotate(190deg) saturate(200%);
-    opacity: 0.3;
+    z-index: 0;
+    opacity: 0.2;
     overflow: hidden;
 }
 
-@media(max-width: 391px) {
+.video {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+    /* width: 100%; */
+}
+
+@media(max-width: 600px) {
     .container {
         height: 100%;
     }
 
 
     .inner {
+        gap: 25px;
         max-width: 100%;
         flex-direction: column;
         padding-left: var(--padding-mobile-container-horizontal);

@@ -6,43 +6,40 @@ import Logo from '../ui/Logo/Logo';
 import { useDataStore } from '../../../store';
 import classNames from 'classnames';
 import { slides } from '../pages/Home';
-
-const slideIndex = (id) => {
-	return slides.findIndex((s) => s.slideProps.id === id);
-};
+import LogoNamed from '../../assets/icons/logo-named.svg?react';
 
 const MenuList = ({ className, setCurrentSlide, isMobile, close }) => {
 	return (
 		<ul className={className}>
 			<li>
-				<button
+				<a
+					href='#AboutUsMore'
 					onClick={() => {
-						setCurrentSlide(slideIndex('AboutUs'));
 						isMobile && close?.();
 					}}
 				>
 					About
-				</button>
+				</a>
 			</li>
 			<li>
-				<button
+				<a
+					href='#AdminPanel'
 					onClick={() => {
-						setCurrentSlide(slideIndex('AdminPanel'));
 						isMobile && close?.();
 					}}
 				>
 					Admin panel
-				</button>
+				</a>
 			</li>
 			<li>
-				<button
+				<a
+					href='#Profit'
 					onClick={() => {
-						setCurrentSlide(slideIndex('Registration'));
 						isMobile && close?.();
 					}}
 				>
-					HOW TO CONNECT
-				</button>
+					Profit Calculator
+				</a>
 			</li>
 			{/* <div className={styles.logo}>
             <Logo />
@@ -57,14 +54,12 @@ const Header = ({ currentSlide, setCurrentSlide }) => {
 	const current = currentSlide.slideProps.id;
 	const contrastLogo = current === 'Profit' && step > 0;
 	const isLastSlide = current === 'Footer';
+	const isWelcomeScreen = useDataStore((s) => s.isWelcomeScreen);
+
+	console.log('isWelcomeScreen', isWelcomeScreen);
 
 	return (
 		<header className={classNames(styles.container, isLastSlide && 'hide')}>
-			{currentSlide.slideProps.id !== 'Welcome' && (
-				<div className={styles.logoSmall}>
-					<Logo contrast={contrastLogo} />
-				</div>
-			)}
 			{isMobileMenuOpen && (
 				<div className={styles.menuMobileLayout}>
 					<button onClick={() => setIsMobileMenuOpen((prev) => !prev)} style={{ marginRight: 'auto' }}>
@@ -92,9 +87,12 @@ const Header = ({ currentSlide, setCurrentSlide }) => {
 				/>
 			</button>
 			<MenuList className={styles.list} setCurrentSlide={setCurrentSlide} />
-			<button className={styles.regButton} onClick={() => setCurrentSlide(slideIndex('Registration'))}>
-				Registration
-			</button>
+			<a href='#Welcome'>
+				<LogoNamed className={classNames(styles.logoNamed, !isWelcomeScreen && styles.logoNamedAppear)} />
+			</a>
+			<div className={styles.rightPanel}>
+				<a href='#Registration'>Registration</a>
+			</div>
 		</header>
 	);
 };

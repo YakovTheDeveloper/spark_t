@@ -14,16 +14,6 @@ const Home = () => {
 				<img src={Logo} alt='logo' />
 				<div className={styles.brandContainer}>
 					<p className={styles.brand}>spark-t</p>
-					<p
-						className={styles.info}
-						style={{
-							position: 'absolute',
-							top: '10px',
-						}}
-					>
-						<span>Unlock full potential of being</span>
-						<span>a validator with us</span>
-					</p>
 				</div>
 			</div>
 			<div className={styles.bottom}>

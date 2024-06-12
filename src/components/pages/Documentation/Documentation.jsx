@@ -14,13 +14,7 @@ const Documentation = () => {
 				</p>
 			</div>
 			<div className={styles.buttonContainer}>
-				<Button
-					style={{
-						background: 'rgba(0, 163, 255, 1)',
-					}}
-				>
-					<DownloadIcon />
-				</Button>
+				<Button>View</Button>
 			</div>
 			{/* <ul className={styles.docs}>
 				<li className={styles.doc}>

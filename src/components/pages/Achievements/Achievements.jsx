@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { debounce } from '../../../utils/debounce';
 import { useSwipeable } from 'react-swipeable';
 import { assignRefs } from '../../../utils/assignRefs';
+import useDetectScroll from '@smakss/react-scroll-direction';
 
 const items = [
 	{
@@ -30,10 +31,10 @@ const items = [
 	},
 ];
 
-const Item = ({ children, className, style, item }) => {
+const Item = ({ children, className, style, item, onClick }) => {
 	const { title, content } = item;
 	return (
-		<div className={classNames(styles.item, className)} style={style}>
+		<div className={classNames(styles.item, className)} style={style} onClick={onClick}>
 			<h2>{title}</h2>
 			<p>{content}</p>
 			{children}
@@ -49,13 +50,19 @@ function useFirstRender() {
 	return firstRender.current;
 }
 
-const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
+const Achievements = () => {
 	const achievementItemsRef = useRef(null);
 	const [currentItem, setCurrentItem] = useState(0);
 	// const [eventScroll, setEventScroll] = useState(null);
+	const { scrollDir, scrollPosition } = useDetectScroll();
+
 	const ref = useRef();
+	const intersect = useOnScreen(achievementItemsRef, {
+		threshold: 0.7,
+	});
 	const titleRef = useRef();
 	const firstRender = useFirstRender();
+
 	const scrollToNextAchievement = () => {
 		setCurrentItem((prev) => (prev < achievementItemsRef.current?.children?.length - 1 ? prev + 1 : prev));
 	};
@@ -68,79 +75,86 @@ const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 		return dir === 'next' ? scrollToNextAchievement() : scrollToPreviousAchievement();
 	};
 
+	// useEffect(() => {
+	// 	if (firstRender) return;
+	// 	if (achievementItemsRef.current?.children.length > 0) {
+	// 		const slide = achievementItemsRef.current?.children[currentItem];
+	// 		slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+	// 	}
+	// }, [currentItem]);
+
+	// const oldScroll = useRef(null);
+
+	// const handleScroll = () => {
+	// 	console.log('oldScroll', oldScroll);
+	// 	console.log(oldScroll > window.scrollY ? 'up' : 'down');
+	// 	oldScroll.current = window.scrollY;
+	// };
+
+	// const debouncedHandler = useRef(debounce(handleScroll, 50)).current;
+
 	useEffect(() => {
-		if (firstRender) return;
-		if (achievementItemsRef.current?.children.length > 0) {
-			const slide = achievementItemsRef.current?.children[currentItem];
-			slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+		if (!intersect) return;
+
+		const timeout = setTimeout(() => {
+			console.log(scrollDir);
+			scrollDir === 'up' && scrollToPreviousAchievement();
+			scrollDir === 'down' && scrollToNextAchievement();
+		}, 100);
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [scrollDir, scrollPosition, intersect]);
+
+	useEffect(() => {
+		const element = achievementItemsRef.current?.children[currentItem];
+
+		if (element) {
+			const container = achievementItemsRef.current;
+
+			const scrollLeft = element.offsetLeft - container.offsetLeft;
+
+			container.scrollTo({
+				left: scrollLeft - 120,
+				behavior: 'smooth',
+			});
 		}
 	}, [currentItem]);
 
-	const handler = useCallback(
-		(event, currentItem) => {
-			// const parent = ref.current;
-			// const child = event.srcElement;
-			// const isCurrentSlideScroll = parent.contains(child);
-			// if (!isCurrentSlideScroll) return;
-
-			const isLastElement = achievementItemsRef.current?.children.length - 1 === currentItem;
-			const downScroll = event.deltaY > 0;
-			const upScroll = event.deltaY < 0;
-			if (upScroll && currentItem === 0) {
-				scrollToPreviousSection();
-				return;
-			}
-			if (downScroll && isLastElement) {
-				scrollToNextSection();
-				return;
-			}
-
-			event.deltaY > 0 ? scrollItems('next') : scrollItems('prev');
-		},
-		[currentItem],
-	);
-
-	const debouncedHandler = useRef(debounce(handler, 250)).current;
-
-	useEffect(() => {
-		const listener = (event) => {
-			event.preventDefault();
-			debouncedHandler(event, currentItem);
-		};
-
-		ref.current?.addEventListener('wheel', listener, { passive: false });
-
-		return () => {
-			ref.current?.removeEventListener('wheel', listener);
-		};
-	}, [debouncedHandler, currentItem, handler]);
-
-	const swipeHandler = (direction) => {
-		if (direction === 'right' && currentItem === 0) {
-			scrollToPreviousSection();
-			return;
-		}
-		if (downScroll && isLastElement) {
-			scrollToNextSection();
-			return;
-		}
-	};
-
-	const onSwipedRight = () => {
+	const onSwipedRight = (event) => {
+		// e.event.preventDefault();
 		scrollToPreviousAchievement();
 	};
-	const onSwipedLeft = () => {
+	const onSwipedLeft = (event) => {
+		// e.event.preventDefault();
 		scrollToNextAchievement();
 	};
+
+	const onSwipedUp = (e) => {};
+	const onSwipedDown = (e) => {};
 
 	const swipeConfig = {
 		onSwipedRight,
 		onSwipedLeft,
+		onSwipedUp,
+		onSwipedDown,
 		touchEventOptions: { passive: false },
 		preventScrollOnSwipe: true,
 		trackTouch: true,
-		delta: 1,
+		delta: 20,
 	};
+
+	// useEffect(() => {
+	// 	const handleTouch = (e) => {
+	// 		e.preventDefault();
+	// 	};
+	// 	achievementItemsRef.current?.addEventListener('touchstart', handleTouch, { passive: false });
+	// 	achievementItemsRef.current?.addEventListener('touchmove', handleTouch, { passive: false });
+	// 	achievementItemsRef.current?.addEventListener('touchend', handleTouch, { passive: false });
+
+	// 	return () => {};
+	// }, []);
 
 	const swipeHandlers = useSwipeable(swipeConfig);
 
@@ -155,12 +169,23 @@ const Achievements = ({ scrollToPreviousSection, scrollToNextSection }) => {
 	};
 
 	return (
-		<div className={styles.container} ref={assignRefs(ref, swipeHandlers.ref)}>
+		<div className={styles.container} ref={assignRefs(ref)}>
 			<h1 ref={titleRef}>Statistics and Achievements</h1>
-			<div className={styles.items} ref={achievementItemsRef}>
+			<div
+				className={styles.items}
+				ref={assignRefs(achievementItemsRef, swipeHandlers.ref)}
+				style={
+					{
+						// transform: `translateY(${currentItem * 50}px)`,
+					}
+				}
+			>
 				{items.map((item, index) => (
 					<Item
 						item={item}
+						onClick={() => {
+							setCurrentItem(index);
+						}}
 						className={index === currentItem && styles.itemSelected}
 						style={{
 							opacity: opacity(index),

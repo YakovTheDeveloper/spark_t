@@ -19,7 +19,7 @@ const Profit = () => {
 		if (!stake || isEnd) return;
 		const timeout = setTimeout(() => {
 			setStep(1);
-		}, 1000);
+		}, 300);
 		return () => clearTimeout(timeout);
 	}, [stake]);
 
@@ -34,7 +34,7 @@ const Profit = () => {
 		if (step !== 1) return;
 		setTimeout(() => {
 			setStep(2);
-		}, 1500);
+		}, 700);
 	}, [step]);
 
 	return (

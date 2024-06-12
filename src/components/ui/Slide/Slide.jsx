@@ -7,10 +7,10 @@ import { useSwipeable } from 'react-swipeable';
 const Slide = (props, ref) => {
 	const { children, className = null, id = '', scrollToNextSection, scrollToPreviousSection } = props;
 
-	console.log('id', id);
+	// console.log('id', id);
 
 	const handleSwipedUp = (event) => {
-		console.log('event', event);
+		// console.log('event', event);
 		scrollToNextSection();
 	};
 
@@ -18,24 +18,25 @@ const Slide = (props, ref) => {
 		scrollToPreviousSection();
 	};
 
-	const swipeConfig = {
-		onSwipedUp: handleSwipedUp,
-		onSwipedDown: handleSwipedDown,
-		touchEventOptions: { passive: false },
-		preventScrollOnSwipe: true,
-		trackTouch: true,
-		delta: 1,
-	};
+	// const swipeConfig = {
+	// 	onSwipedUp: handleSwipedUp,
+	// 	onSwipedDown: handleSwipedDown,
+	// 	touchEventOptions: { passive: false },
+	// 	preventScrollOnSwipe: true,
+	// 	trackTouch: true,
+	// 	delta: 1,
+	// };
 
-	const swipeHandlers = useSwipeable(swipeConfig);
+	// const swipeHandlers = useSwipeable(swipeConfig);
 
 	return (
 		<section
+			id={id}
 			ref={(el) => {
 				ref(el);
-				if (id === 'KeyFeatures') return;
-				if (id === 'AboutUsMoreDetailed') return;
-				swipeHandlers.ref(el);
+				// if (id === 'KeyFeatures') return;
+				// if (id === 'AboutUsMoreDetailed') return;
+				// swipeHandlers.ref(el);
 			}}
 			className={classNames(styles.slide, id && styles[id], className)}
 		>

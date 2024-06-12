@@ -1,6 +1,7 @@
 import React from 'react';
 import LogoIcon from '../../../assets/logo-small.png';
 import LogoIconContrast from '../../../assets/logo-small-contrast.png';
+import LogoSmall from '../../../assets/icons/logo.svg?react';
 import styles from './Logo.module.css';
 import classNames from 'classnames';
 

@@ -14,7 +14,7 @@
 }
 
 .container a, .container button {
-    font-size: 24px;
+    font-size: 20px;
     white-space: nowrap;
 }
 
@@ -73,7 +73,30 @@
 }
 
 
-@media(max-width: 391px) {
+.rightPanel {
+    display: flex;
+    align-items: center;
+}
+
+.logoNamed {
+    transition: transform 0.6s ease-in-out, opacity 0.3s, top 0.3s, left 0.3s;
+    position: absolute;
+    top: -200%;
+    left: 55%;
+    transform: translate(-50%, -50%) scale(1.2);
+    /* transform: translate(-50%, -500%) scale(2); */
+    opacity: 0;
+}
+
+.logoNamedAppear {
+    transform: translate(-50%, -50%) scale(1);
+    /* transform: translate(-50%, -50%) scale(1); */
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+}
+
+@media(max-width: 600px) {
     .container {
         /* display: none; */
         height: 70px;
@@ -83,7 +106,7 @@
         padding-right: var(--padding-mobile-container-horizontal);
     }
 
-    .container .list, .container .regButton {
+    .container .list, .container .rightPanel {
         display: none;
     }
 

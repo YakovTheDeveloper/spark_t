@@ -12,20 +12,32 @@ const Footer = () => {
 			<nav>
 				<ul>
 					<li className={styles.listItemTitle}>Contacts</li>
-					<li className={styles.listItem}>mail@srark.t</li>
-					<li className={styles.listItem}>Twitter</li>
-					<li className={styles.listItem}>Telegram</li>
+					<li className={styles.listItem}>
+						<a href='mailto:mail@srark.t'>Email</a>
+					</li>
+					<li className={styles.listItem}>
+						<a href='#'>Twitter</a>
+					</li>
+					<li className={styles.listItem}>
+						<a href='#'>Telegram</a>
+					</li>
 				</ul>
 				<ul>
 					<li className={styles.listItemTitle}>Links</li>
-					<li className={styles.listItem}>FAQ</li>
-					<li className={styles.listItem}>Case Studies</li>
-					<li className={styles.listItem}>Blog</li>
+					<li className={styles.listItem}>
+						<a href='#'>FAQ</a>
+					</li>
+					<li className={styles.listItem}>
+						<a href='#'>Case Studies</a>
+					</li>
+					<li className={styles.listItem}>
+						<a href='#'>Blog</a>
+					</li>
 				</ul>
 			</nav>
 			<div className={styles.additionals}>
 				<Logo size={'small'} />
-				<p>all rights reserved 2024</p>
+				<p>ⓒ 2024 All Rights Reserved</p>
 			</div>
 		</div>
 	);

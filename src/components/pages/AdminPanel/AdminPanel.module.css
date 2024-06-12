@@ -12,7 +12,7 @@
 
 .text {}
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
     .container {
         top: 20%;
         padding-left: var(--padding-mobile-container-horizontal);

@@ -5,6 +5,8 @@
     padding-right: var(--padding-desktop-container-horizontal);
     height: 100%;
     padding-top: 15%;
+    gap: 40px 10px;
+    flex-wrap: wrap;
 }
 
 
@@ -89,6 +91,7 @@
     flex-grow: 1;
     position: relative;
     transition: all 0.3s ease-in-out;
+    /* margin: 0 auto; */
 }
 
 .formContainer {
@@ -109,7 +112,7 @@
     opacity: 1;
 }
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
 
     .container {
         flex-direction: column;

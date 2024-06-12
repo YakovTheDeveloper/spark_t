@@ -4,8 +4,9 @@
     flex-direction: column;
     margin: auto;
     /* justify-content: center; */
+    min-height: 100vh;
     height: 100%;
-    padding-top: 15%;
+    padding-top: 20vh;
     gap: 40px;
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
@@ -15,6 +16,7 @@
     background-image: url('../../../assets/blur/blur-profit-0.png');
     background-repeat: no-repeat;
     background-position: left;
+    background-size: cover;
 
 }
 
@@ -92,6 +94,7 @@
     justify-content: center;
     max-width: 506px;
     flex-grow: 1;
+    z-index: 1;
 }
 
 .regButton button {
@@ -99,7 +102,7 @@
 }
 
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
     .header {
         gap: 15px;
         padding-top: 60px;
@@ -122,6 +125,7 @@
         padding-right: var(--padding-mobile-container-horizontal);
         gap: 24px;
         background-position: center;
+        padding-bottom: 80px;
     }
 
     .container-step-3 {
@@ -156,7 +160,12 @@
 
     .regButton {
         align-items: flex-end;
+        padding-top: 10vh;
         padding-bottom: 50px;
+    }
+
+    .regButton button {
+        font-size: 24px;
     }
 
 

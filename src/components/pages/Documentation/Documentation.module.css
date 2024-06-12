@@ -1,14 +1,40 @@
 .container {
-    margin-top: 15%;
+    /* margin-top: 15%; */
+    padding-top: 25vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
+    gap: 15px 0;
+
+    position: relative;
+}
+
+.container:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    /* width: 100%;
+    height: 100%; */
+    /* width: 100px;
+    height: 100px; */
+    background-image: url('../../../assets/admin-panel.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto;
+    filter: blur(4px) saturate(2);
+    opacity: 0.5;
+    z-index: 2;
 }
 
 .header {
     display: flex;
-    gap: 45px;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .header p {
@@ -17,6 +43,13 @@
 }
 
 .header h1 {}
+
+.buttonContainer {
+    display: flex;
+    max-width: 368px;
+    margin-top: auto;
+    margin-bottom: 15vh;
+}
 
 
 .docs {
@@ -30,10 +63,10 @@
     border-bottom: 1px solid #fff;
 }
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
 
     .container {
-        margin-top: 22vh;
+        padding-top: 22vh;
         padding-left: var(--padding-mobile-container-horizontal);
         padding-right: var(--padding-mobile-container-horizontal);
         gap: 20px;
@@ -41,7 +74,12 @@
 
     .header {
         flex-direction: column;
-        gap: 16px;
+        gap: 6px;
     }
+
+    .buttonContainer {
+        max-width: 100%;
+    }
+
 
 }

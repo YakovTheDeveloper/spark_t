@@ -2,12 +2,47 @@
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
     padding-top: 20vh;
+    padding-bottom: 5vh;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     height: 100%;
     position: relative;
     flex-grow: 1;
+    overflow: hidden;
+
+
+    /* height: 100vh; */
+}
+
+.titleContainer {
+    font-size: 60px;
+    position: relative;
+}
+
+.container p {
+    transition: opacity 0.25s;
+}
+
+.container h1 {
+    transition: transform 0.2s ease-in-out, font-size 0.2s;
+}
+
+.container h2 {
+    width: fit-content;
+}
+
+
+
+.aboutStepOne {
+    max-width: 800px;
+}
+
+.aboutStepOneText {
+    max-width: 600px;
+    padding-top: 20px;
+    padding-bottom: 20vh;
+    font-size: 22px;
 }
 
 .background {
@@ -31,7 +66,8 @@
     width: 600px;
 }
 
-.container a {
+.container .aboutItem {
+    cursor: pointer;
     font-weight: 500;
     font-size: 52px;
     line-height: 63px;
@@ -48,8 +84,7 @@
 .info {
     max-width: 710px;
     font-weight: 400;
-    font-size: 36px;
-    line-height: 43px;
+    font-size: 30px;
     margin-left: auto;
 }
 
@@ -57,7 +92,7 @@
     color: #fff;
 }
 
-.unselectedLink {
+.unselected {
     color: rgba(255, 255, 255, 0.44);
 }
 
@@ -98,15 +133,16 @@
     object-fit: fill
 }
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
     .container {
         padding-left: var(--padding-mobile-container-horizontal);
         padding-right: var(--padding-mobile-container-horizontal);
         flex-direction: column-reverse;
-        padding-top: 110px;
+        /* padding-top: 110px; */
+        gap: 40px;
     }
 
-    .container a {
+    .container .aboutItem {
         font-weight: 500;
         font-size: 24px;
         line-height: 30px;
@@ -123,6 +159,10 @@
         margin: auto 0;
     }
 
+    .aboutStepOneText {
+        order: 1;
+    }
+
     .selectedLink:after {
         width: 40px;
         height: 40px;
@@ -133,6 +173,10 @@
     .videoContainer video {
         max-width: 1440px;
         width: 1440px;
+    }
+
+    .aboutStepOneText {
+        font-size: inherit;
     }
 }
 

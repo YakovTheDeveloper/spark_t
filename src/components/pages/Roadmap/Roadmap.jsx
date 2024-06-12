@@ -15,7 +15,7 @@ const Roadmap = () => {
 				<article className={styles.point}>
 					<h2>Future Developments</h2>
 					<p className={styles.description}>
-						Include other upcoming milestones and development relevant to your project.
+						Include other upcoming milestones and development relevant to your project
 					</p>
 					<p>13.12.2024</p>
 				</article>

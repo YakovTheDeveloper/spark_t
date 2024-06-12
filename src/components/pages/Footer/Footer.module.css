@@ -13,7 +13,7 @@
     margin-bottom: 12px;
 }
 
-.listItem {
+.listItem a {
     color: rgba(255, 255, 255, 0.66);
 }
 
@@ -22,6 +22,12 @@
     justify-content: space-between;
     flex-grow: 1;
     max-width: 400px;
+}
+
+.container ul {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .additionals {
@@ -38,7 +44,7 @@
 }
 
 
-@media(max-width: 391px) {
+@media(max-width: 600px) {
     .container {
         padding: 30px;
         padding-left: var(--padding-mobile-container-horizontal);
