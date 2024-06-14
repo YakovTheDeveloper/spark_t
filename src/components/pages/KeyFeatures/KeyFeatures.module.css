@@ -1,7 +1,7 @@
 .container {
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
-    padding-top: 15%;
+    padding-top: 5%;
     width: 100%;
     gap: 30px;
     display: flex;

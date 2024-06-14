@@ -1,5 +1,5 @@
 .container {
-    transition: all 1s;
+    transition: all 2s ease-in-out;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -20,11 +20,11 @@
 
 }
 
-.container-step-2 {
+/* .container-step-2 {
     background-image: url('../../../assets/blur/blur-profit.png');
-}
+} */
 
-.container-step-3 {
+.container-step-2 {
     background-image: url('../../../assets/blur/blur-profit-2.png');
 }
 
@@ -71,6 +71,7 @@
     gap: 10px;
     color: rgba(255, 255, 255, 0.25);
     font-size: 32px;
+    transition: all 0.5s;
 }
 
 .result .opacityText {
@@ -79,6 +80,10 @@
 
 .result .willReceive {
     font-size: 24px;
+}
+
+.result span {
+    transition: all 3s;
 }
 
 

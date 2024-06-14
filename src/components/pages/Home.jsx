@@ -28,7 +28,7 @@ export const slides = [
 		Component: OurVision,
 		slideProps: {
 			id: 'OurVision',
-			className: styles.OurVision,
+			className: styles.ourVision,
 		},
 		componentProps: {},
 	},
@@ -36,6 +36,7 @@ export const slides = [
 		Component: KeyFeatures,
 		slideProps: {
 			id: 'KeyFeatures',
+			className: styles.keyFeatures,
 		},
 		componentProps: {},
 	},
@@ -87,7 +88,7 @@ export const slides = [
 	},
 	{
 		Component: Achievements,
-		slideProps: { id: 'Achievements' },
+		slideProps: { id: 'Achievements', className: styles.achievements },
 		componentProps: {},
 	},
 	{

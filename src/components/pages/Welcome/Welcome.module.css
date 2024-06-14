@@ -33,6 +33,10 @@
     max-width: 330px;
 }
 
+.logo {
+    transition: all 0.3s ease-in-out, opacity 2s ease-in;
+}
+
 .info {
     width: 100%;
     display: flex;

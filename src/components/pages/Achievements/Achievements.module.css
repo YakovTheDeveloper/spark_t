@@ -1,12 +1,13 @@
 .container {
     /* padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal); */
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100vh;
+    top: 0;
+    position: sticky;
     overflow: hidden;
-    position: relative;
 }
 
 .container ::-webkit-scrollbar {
@@ -16,14 +17,15 @@
 .container h1 {
     width: 100%;
     position: absolute;
-    top: 15vh;
+    top: 25vh;
     left: 0;
     text-align: center;
 }
 
 .items {
-    height: 574px;
-    padding-top: 5vh;
+    height: 650px;
+    padding-top: 25vh;
+    padding-bottom: 5vh;
     padding-right: var(--padding-desktop-container-horizontal);
     display: flex;
     align-items: center;
@@ -104,6 +106,8 @@
 
     .items {
         padding-top: 20vh;
+        overflow: clip;
+        overflow-y: clip;
     }
 
     .item {

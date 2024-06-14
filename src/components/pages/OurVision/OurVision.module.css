@@ -1,5 +1,5 @@
 .container {
-    margin-top: 10%;
+    /* margin-top: 10%; */
     position: relative;
     height: 445px;
     overflow: hidden;
@@ -7,7 +7,7 @@
 }
 
 .inner {
-    padding-top: 100px;
+    padding-top: 30vh;
     max-width: 95%;
     padding-left: var(--padding-desktop-container-horizontal);
     padding-right: var(--padding-desktop-container-horizontal);
@@ -20,8 +20,9 @@
     padding-top: unset;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.7);
-    line-height: 43px;
-    font-size: 32px;
+    line-height: 35px;
+    margin-top: 8px;
+    font-size: 28px;
     width: 600px;
 
 }
@@ -32,7 +33,7 @@
 
 .videoContainer {
     position: absolute;
-    top: 0;
+    top: 0vh;
     left: 0;
     right: 0;
     bottom: 0;

@@ -6,194 +6,134 @@ import { useSwipeable } from 'react-swipeable';
 import { assignRefs } from '../../../utils/assignRefs';
 import { debounce } from '../../../utils/debounce';
 import useOnScreen from '../../../hooks/useOnScreen';
+import useDetectScroll from '@smakss/react-scroll-direction';
 
 const text = {
-	1: `After you update the validator software (just like connecting Jito), our MEV 
+	2: `After you update the validator software (just like connecting Jito), our MEV 
     system will start working on your slots. We will share the profits with you through 
     daily payouts. You can monitor all the details using the admin panel.`,
-	2: `We have analyzed our competitors including jtio and found that our payout is significantly higher than others. The reasons for this are that we give more revenue to our validators, and our MEV is more communal and accurate.`,
-	3: `Our relation manager will contact you and provide exact instructions on connection and will follow you around until you're completely through the process.
+	3: `We have analyzed our competitors including jtio and found that our payout is significantly higher than others. The reasons for this are that we give more revenue to our validators, and our MEV is more communal and accurate.`,
+	4: `Our relation manager will contact you and provide exact instructions on connection and will follow you around until you're completely through the process.
     You will have to update software of your validator (just like if you were connecting to jito). `,
 };
 const titles = ['How does it work?', 'Spark-T advantages', 'How to connect to Spark-T?'];
 
-const AboutUsMore = ({ detailed, scrollToNextSection, scrollToPreviousSection }) => {
+const AboutUsMore = () => {
 	const [step, setStep] = useState(0);
+	const { scrollDir, scrollPosition } = useDetectScroll();
 
 	const ref = useRef(null);
 	const videoRef = useRef(null);
 
-	const getLinkStyle = (linkPosition) => {
-		if (!detailed) return styles.link;
-		return step + 1 === linkPosition ? styles.selectedLink : styles.unselectedLink;
-	};
-
 	const nextStep = useCallback(() => {
 		setStep((prev) => {
-			return prev < 3 ? prev + 1 : prev;
+			return prev < 4 ? prev + 1 : prev;
 		});
 	});
 
 	const prevStep = useCallback(() => {
 		setStep((prev) => {
-			return prev > 1 ? prev - 1 : prev;
+			return prev > 0 ? prev - 1 : prev;
 		});
 	});
 
-	const [translate, setTranslate] = useState(0);
-
-	const scrollHandler = (event, stepp) => {
-		// console.log('from fucntion', stepp);
-		// console.log('from use state', step);
-		const scrollDown = event.deltaY > 0;
-		// console.log('scrollDown', scrollDown);
-
-		// if (step === 0 && scrollUp) {
-		// 	scrollToPreviousSection();
-		// 	return;
-		// }
-
-		// if (step === 2 && scrollDown) {
-		// 	scrollToNextSection();
-		// 	return;
-		// }
-		scrollDown ? nextStep() : prevStep();
-	};
-
-	// const swipeHandler = (direction) => {
-	// 	if (!detailed) return;
-
-	// 	if (step === 0 && direction === 'down') {
-	// 		scrollToPreviousSection();
-	// 		return;
+	// useEffect(() => {
+	// 	if (ref.current) {
+	// 		const rect = ref.current?.getBoundingClientRect();
+	// 		const startY = scrollPosition.top + rect.top;
+	// 		const endY = scrollPosition.top + rect.top + rect.height;
+	// 		const currentScroll = scrollPosition.top + window.innerHeight / 2; // middle of the viewport
+	// 				console.log(`
+	// 		${rect},
+	// 		${startY},
+	// 		${endY},
+	// 		${currentScroll},
+	// 		`);
+	// 		const block2Height = endY - startY;
+	// 		const twentyPercent = startY + block2Height * 0.2;
+	// 		const fortyPercent = startY + block2Height * 0.4;
+	// 		console.log(`
+	//             ${block2Height},
+	//             ${twentyPercent},
+	//             ${fortyPercent},
+	//             `);
+	// 		if (currentScroll >= twentyPercent && currentScroll < fortyPercent) {
+	// 			console.log('step 0');
+	// 		} else if (currentScroll >= fortyPercent) {
+	// 			console.log('step 1');
+	// 		}
 	// 	}
-
-	// 	if (step === 2 && direction === 'up') {
-	// 		scrollToNextSection();
-	// 		return;
-	// 	}
-	// 	direction === 'up' ? nextStep() : prevStep();
-
-	const lastRef = useRef();
-
-	const intersect = useOnScreen(ref, {
-		threshold: 0.6,
-	});
-
-	const intersect2 = useOnScreen(lastRef, {
-		threshold: 0,
-	});
-
+	// }, [scrollPosition]);
 	useEffect(() => {
-		const handler = (event) => {
-			if (intersect2) return;
-			const scrollDown = event.deltaY > 0;
-			const scrollUp = event.deltaY < 0;
-
-			if (translate <= 400) {
-				setTranslate((prev) => {
-					if (prev <= 0 && scrollUp) return prev;
-					if (prev >= 400 && scrollDown) return prev;
-					return prev + parseInt(event.deltaY) * 1;
-				});
+		if (ref.current) {
+			const rect = ref.current.getBoundingClientRect();
+			// console.log(rect);
+			if (rect.y > 0) {
+				prevStep();
+				return;
 			}
-		};
-		if (!intersect) return () => document.removeEventListener('wheel', handler);
-
-		document.addEventListener('wheel', handler);
-
-		return () => document.removeEventListener('wheel', handler);
-	}, [intersect, intersect2]);
-
-	console.log('intersect', intersect);
-	// };
-	const debouncedHandler = useRef(debounce(scrollHandler, 200)).current;
-
-	const handleIntersection = (entries, observer) => {
-		entries.map((entry) => {
-			console.log(entry);
-		});
-	};
-
-	useEffect(() => {
-		intersect2 && setStep(1);
-	}, [intersect2]);
-
-	useEffect(() => {
-		const handler = (event) => {
-			const scrollDown = event.deltaY > 0;
-			const scrollUp = event.deltaY < 0;
-
-			// if (step === 1 && scrollUp) {
-			// 	event.preventDefault();
-			// }
-			scrollDown && nextStep();
-			scrollUp && prevStep();
-		};
-
-		if (step > 0) {
-			ref.current?.addEventListener('wheel', handler, { passive: false });
+			if (rect.y < 0) {
+				nextStep();
+				return;
+			}
 		}
-		return () => ref.current?.removeEventListener('wheel', handler);
-	}, [step]);
 
-	const titleStyle2 = {
-		transform: `translateY(${translate}px)`,
-		fontSize: translate <= 0 ? '60px' : `${10000 / translate}px`,
-	};
+		const timeout = setTimeout(() => {
+			scrollDir === 'up' && prevStep();
+			scrollDir === 'down' && nextStep();
+		}, 35);
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [scrollDir, scrollPosition]);
+
+	const titleStyle2 =
+		step > 0
+			? {
+					transform: `translateY(40vh)`,
+					fontSize: '16px',
+			  }
+			: {};
 
 	return (
 		<>
-			<div className={classNames(styles.container, step === 0 && styles.background)} ref={assignRefs(ref)}>
+			<div className={classNames(styles.container, step < 2 && styles.background)} ref={assignRefs(ref)}>
 				<h1 style={titleStyle2} className={styles.titleContainer}>
 					About Us
 				</h1>
 				<p
-					className={styles.aboutStepOneText}
+					className={classNames(styles.aboutStepOneText, step > 0 && 'hide')}
 					style={{
-						opacity: translate === 0 ? 1 : 0,
+						opacity: step === 0 ? 1 : 0,
 					}}
 				>
 					Since 2020, our team has been a leading searcher in the Ethereum ecosystem. With the launch of MEV on
 					Solana, we have expanded our infrastructure to support and enhance the Solana network, leveraging our
 					expertise to benefit both - validators and searchers.
 				</p>
-				{/* <div className={styles.aboutStepOne}>
-					<div className={styles.titleContainer} style={titleStyle}>
-						<h1>About Us</h1>
+				{step > 1 && <p className={styles.info}>{text[step]}</p>}
+				{step > 0 && (
+					<div className={styles.links}>
+						<p>
+							{titles.map((title, index) => (
+								<h2 onClick={() => setStep(index + 2)}>
+									<p
+										className={classNames(
+											styles.aboutItem,
+											styles.link,
+											step > 1 ? (step === index + 2 ? styles.selectedLink : styles.unselected) : null,
+										)}
+									>
+										{title}
+									</p>
+								</h2>
+							))}
+						</p>
 					</div>
-					<p
-						className={styles.aboutStepOneText}
-						style={{
-							opacity: translate === 0 ? 1 : 0,
-						}}
-					>
-						Since 2020, our team has been a leading searcher in the Ethereum ecosystem. With the launch of MEV on
-						Solana, we have expanded our infrastructure to support and enhance the Solana network, leveraging our
-						expertise to benefit both - validators and searchers
-					</p>
-				</div> */}
-				{step !== 0 && <p className={styles.info}>{text[step]}</p>}
-				<div className={styles.links}>
-					{/* <p className={styles.about}>about us</p> */}
-					<p>
-						{titles.map((title, index) => (
-							<h2 onClick={() => setStep(index + 1)} ref={index === 2 ? lastRef : null}>
-								<p
-									className={classNames(
-										styles.aboutItem,
-										styles.link,
-										step ? (step === index + 1 ? styles.selectedLink : styles.unselected) : null,
-									)}
-								>
-									{title}
-								</p>
-							</h2>
-						))}
-					</p>
-				</div>
+				)}
 			</div>
-			{step > 0 && (
+			{step > 1 && (
 				<div className={styles.videoContainer}>
 					<video className={styles.video} autoPlay loop muted ref={videoRef}>
 						<source src={Video} type='video/mp4' />
@@ -205,6 +145,41 @@ const AboutUsMore = ({ detailed, scrollToNextSection, scrollToPreviousSection })
 };
 
 export default AboutUsMore;
+
+const test = () => {
+	return (
+		<div
+			style={{
+				height: '10000px',
+			}}
+		>
+			<div
+				style={{
+					height: '2500px',
+				}}
+				className='block-1'
+			></div>
+			<div
+				style={{
+					height: '2500px',
+				}}
+				className='block-2'
+			></div>
+			<div
+				style={{
+					height: '2500px',
+				}}
+				className='block-3'
+			></div>
+			<div
+				style={{
+					height: '2500px',
+				}}
+				className='block-4'
+			></div>
+		</div>
+	);
+};
 
 // const titleStyle2 = {
 //     transform: `translateY(${translate}px)`,

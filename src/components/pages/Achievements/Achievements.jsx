@@ -57,11 +57,8 @@ const Achievements = () => {
 	const { scrollDir, scrollPosition } = useDetectScroll();
 
 	const ref = useRef();
-	const intersect = useOnScreen(achievementItemsRef, {
-		threshold: 0.7,
-	});
+
 	const titleRef = useRef();
-	const firstRender = useFirstRender();
 
 	const scrollToNextAchievement = () => {
 		setCurrentItem((prev) => (prev < achievementItemsRef.current?.children?.length - 1 ? prev + 1 : prev));
@@ -71,41 +68,30 @@ const Achievements = () => {
 		setCurrentItem((prev) => (prev > 0 ? prev - 1 : prev));
 	};
 
-	const scrollItems = (dir) => {
-		return dir === 'next' ? scrollToNextAchievement() : scrollToPreviousAchievement();
-	};
-
-	// useEffect(() => {
-	// 	if (firstRender) return;
-	// 	if (achievementItemsRef.current?.children.length > 0) {
-	// 		const slide = achievementItemsRef.current?.children[currentItem];
-	// 		slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-	// 	}
-	// }, [currentItem]);
-
-	// const oldScroll = useRef(null);
-
-	// const handleScroll = () => {
-	// 	console.log('oldScroll', oldScroll);
-	// 	console.log(oldScroll > window.scrollY ? 'up' : 'down');
-	// 	oldScroll.current = window.scrollY;
-	// };
-
-	// const debouncedHandler = useRef(debounce(handleScroll, 50)).current;
-
 	useEffect(() => {
-		if (!intersect) return;
+		if (ref.current) {
+			const rect = ref.current.getBoundingClientRect();
+			// console.log(rect);
+			if (rect.y > 0) {
+				scrollToPreviousAchievement();
+				return;
+			}
+			if (rect.y < 0) {
+				scrollToNextAchievement();
+				return;
+			}
+		}
 
 		const timeout = setTimeout(() => {
 			console.log(scrollDir);
 			scrollDir === 'up' && scrollToPreviousAchievement();
 			scrollDir === 'down' && scrollToNextAchievement();
-		}, 100);
+		}, 25);
 
 		return () => {
 			clearTimeout(timeout);
 		};
-	}, [scrollDir, scrollPosition, intersect]);
+	}, [scrollDir, scrollPosition]);
 
 	useEffect(() => {
 		const element = achievementItemsRef.current?.children[currentItem];
@@ -144,17 +130,6 @@ const Achievements = () => {
 		trackTouch: true,
 		delta: 20,
 	};
-
-	// useEffect(() => {
-	// 	const handleTouch = (e) => {
-	// 		e.preventDefault();
-	// 	};
-	// 	achievementItemsRef.current?.addEventListener('touchstart', handleTouch, { passive: false });
-	// 	achievementItemsRef.current?.addEventListener('touchmove', handleTouch, { passive: false });
-	// 	achievementItemsRef.current?.addEventListener('touchend', handleTouch, { passive: false });
-
-	// 	return () => {};
-	// }, []);
 
 	const swipeHandlers = useSwipeable(swipeConfig);
 
